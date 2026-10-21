@@ -3,14 +3,7 @@
 import React from 'react';
 import { 
   ArrowRight, 
-  CheckCircle2,
-  Mic,
-  FileText,
-  Tag,
-  Clock,
-  Sparkles,
-  Volume2,
-  Check
+  CheckCircle2
 } from 'lucide-react';
 
 export default function Hero() {
@@ -68,7 +61,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Column: Giant Circular Conversation Workspace Bowl */}
+        {/* Right Column: Giant Circular Semicircle Bowl with Concentric Orbit Arcs */}
         <div className="hero-visual-col">
           <div className="giant-semicircle-wrapper">
             
@@ -101,7 +94,7 @@ export default function Hero() {
                 {/* Dark Navy Deep Studio Base */}
                 <rect x="35" y="0" width="770" height="430" fill="#0A2240" />
 
-                {/* Blended High-Tech Audio Datacenter Texture */}
+                {/* Blended High-Tech Voice Network Texture */}
                 <image 
                   href="/images/hero-cluster.jpg" 
                   x="35" 
@@ -109,7 +102,7 @@ export default function Hero() {
                   width="770" 
                   height="400" 
                   preserveAspectRatio="xMidYMid slice" 
-                  opacity="0.35"
+                  opacity="0.38"
                   style={{ mixBlendMode: 'luminosity' }}
                 />
 
@@ -146,65 +139,6 @@ export default function Hero() {
                 strokeLinecap="round" 
               />
             </svg>
-
-            {/* Conversation Workspace Interactive Card Overlay inside the Bowl */}
-            <div className="workspace-preview-overlay">
-              <div className="wp-header-row">
-                <div className="wp-title-group">
-                  <span className="wp-title">Your Conversation Workspace</span>
-                  <span className="wp-subtitle">Customer Support · Billing Inquiry</span>
-                </div>
-                <div className="wp-status-pill">
-                  <span className="status-dot-amber"></span>
-                  <span>Awaiting review</span>
-                </div>
-              </div>
-
-              {/* Workspace Labels Strip */}
-              <div className="wp-labels-grid">
-                <div className="wp-label-item">
-                  <Mic size={13} className="text-cyan" />
-                  <span className="label-key">Audio Recording:</span>
-                  <span className="label-val">04:32 min</span>
-                </div>
-                <div className="wp-label-item">
-                  <FileText size={13} className="text-emerald" />
-                  <span className="label-key">Transcript:</span>
-                  <span className="label-val">Generated (99.2% conf)</span>
-                </div>
-                <div className="wp-label-item">
-                  <Tag size={13} className="text-coral" />
-                  <span className="label-key">Topics &amp; Keywords:</span>
-                  <span className="label-val">Billing, Tier Downgrade</span>
-                </div>
-                <div className="wp-label-item">
-                  <Clock size={13} className="text-blue" />
-                  <span className="label-key">Conversation Outcome:</span>
-                  <span className="label-val">Follow-up Required</span>
-                </div>
-              </div>
-
-              {/* Audio Waveform Sample Line */}
-              <div className="wp-audio-strip">
-                <div className="audio-play-icon">
-                  <Volume2 size={13} />
-                </div>
-                <div className="waveform-bars">
-                  {[35, 60, 45, 80, 95, 50, 70, 85, 40, 65, 90, 75, 40, 55, 80, 100, 60, 45, 70, 85, 40, 60, 75, 90, 50, 30].map((h, i) => (
-                    <span 
-                      key={i} 
-                      className="wave-bar" 
-                      style={{ height: `${h}%`, opacity: i < 16 ? 1 : 0.4 }}
-                    ></span>
-                  ))}
-                </div>
-                <span className="audio-timestamp">02:14 / 04:32</span>
-              </div>
-
-              <div className="wp-footer-note">
-                <span>Illustrative platform preview · Processing complete · Awaiting review</span>
-              </div>
-            </div>
 
           </div>
         </div>
@@ -382,18 +316,6 @@ export default function Hero() {
           color: #E85A2A;
         }
 
-        .text-cyan {
-          color: #38BDF8;
-        }
-
-        .text-emerald {
-          color: #34D399;
-        }
-
-        .text-blue {
-          color: #60A5FA;
-        }
-
         /* Right Column: Giant Semicircle Visual */
         .hero-visual-col {
           display: flex;
@@ -420,152 +342,6 @@ export default function Hero() {
           display: block;
           overflow: visible;
           filter: drop-shadow(0 20px 50px rgba(10, 34, 64, 0.22));
-        }
-
-        /* Overlay Workspace Card inside the Bowl */
-        .workspace-preview-overlay {
-          position: absolute;
-          top: 36px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 82%;
-          background: rgba(10, 28, 54, 0.94);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(16px);
-          border-radius: 18px;
-          padding: 20px 24px;
-          color: #FFFFFF;
-          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-          z-index: 5;
-        }
-
-        .wp-header-row {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-          padding-bottom: 12px;
-          margin-bottom: 14px;
-        }
-
-        .wp-title-group {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .wp-title {
-          font-family: var(--font-primary);
-          font-size: 1.05rem;
-          font-weight: 800;
-          color: #FFFFFF;
-          letter-spacing: -0.01em;
-        }
-
-        .wp-subtitle {
-          font-family: var(--font-primary);
-          font-size: 0.74rem;
-          color: #94A3B8;
-          font-weight: 500;
-          margin-top: 2px;
-        }
-
-        .wp-status-pill {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          padding: 4px 10px;
-          background: rgba(245, 158, 11, 0.18);
-          border: 1px solid rgba(245, 158, 11, 0.4);
-          border-radius: var(--radius-full);
-          font-size: 0.72rem;
-          font-weight: 600;
-          color: #FBBF24;
-        }
-
-        .status-dot-amber {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #FBBF24;
-          box-shadow: 0 0 6px #FBBF24;
-        }
-
-        /* Workspace Labels Grid */
-        .wp-labels-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 10px;
-          margin-bottom: 16px;
-        }
-
-        .wp-label-item {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 0.72rem;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 8px;
-          padding: 7px 10px;
-        }
-
-        .label-key {
-          color: #94A3B8;
-          font-weight: 500;
-        }
-
-        .label-val {
-          color: #FFFFFF;
-          font-weight: 700;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        /* Audio Waveform Strip */
-        .wp-audio-strip {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          background: rgba(0, 0, 0, 0.25);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 10px;
-          padding: 8px 14px;
-          margin-bottom: 12px;
-        }
-
-        .audio-play-icon {
-          color: #38BDF8;
-          display: flex;
-          align-items: center;
-        }
-
-        .waveform-bars {
-          display: flex;
-          align-items: center;
-          gap: 3px;
-          flex: 1;
-          height: 22px;
-        }
-
-        .wave-bar {
-          flex: 1;
-          background: #38BDF8;
-          border-radius: 2px;
-          min-height: 4px;
-        }
-
-        .audio-timestamp {
-          font-family: var(--font-mono);
-          font-size: 0.72rem;
-          color: #94A3B8;
-        }
-
-        .wp-footer-note {
-          font-size: 0.68rem;
-          color: #64748B;
-          text-align: center;
-          font-style: italic;
         }
 
         /* Responsive Breakpoints */
@@ -602,11 +378,6 @@ export default function Hero() {
           .hero-trust-row {
             white-space: normal;
           }
-          .workspace-preview-overlay {
-            width: 90%;
-            top: 24px;
-            padding: 16px;
-          }
         }
 
         @media (max-width: 640px) {
@@ -624,9 +395,6 @@ export default function Hero() {
             width: 100%;
             text-align: center;
             justify-content: center;
-          }
-          .wp-labels-grid {
-            grid-template-columns: 1fr;
           }
         }
       `}</style>
