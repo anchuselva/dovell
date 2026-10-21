@@ -10,6 +10,7 @@ import {
   FileCheck
 } from 'lucide-react';
 import WaveformSlider from './WaveformSlider';
+import VoiceSignalRunningCanvas from './VoiceSignalRunningCanvas';
 
 export default function RoiCalculator() {
   // Input fields (defaulting to the exact values in the user's screenshot: 2,500 / 8 min / 28% / 12 min)
@@ -24,49 +25,6 @@ export default function RoiCalculator() {
   const estimatedReviewHours = Math.round((selectedForReviewCount * reviewTimePerConv) / 60);
   const equivalentReviewerDays = Math.round(estimatedReviewHours / 8);
 
-  // Dynamic voice waveform bars matching the exact pattern in the user's screenshot
-  // Includes cyan (#38BDF8) and accent coral (#E85A2A) audio bars
-  const baseWaveform = [
-    { h: 10, coral: false },
-    { h: 12, coral: false },
-    { h: 14, coral: false },
-    { h: 18, coral: false },
-    { h: 26, coral: false },
-    { h: 36, coral: false },
-    { h: 50, coral: false },
-    { h: 62, coral: true },  // Coral accent burst
-    { h: 74, coral: true },  // Coral accent burst
-    { h: 58, coral: true },  // Coral accent burst
-    { h: 42, coral: false },
-    { h: 30, coral: false },
-    { h: 22, coral: false },
-    { h: 35, coral: false },
-    { h: 48, coral: false },
-    { h: 65, coral: false },
-    { h: 82, coral: false },
-    { h: 96, coral: false }, // High cyan crest
-    { h: 88, coral: false },
-    { h: 72, coral: false },
-    { h: 56, coral: false },
-    { h: 70, coral: true },  // Second coral burst
-    { h: 84, coral: true },  // Second coral burst
-    { h: 64, coral: true },
-    { h: 46, coral: false },
-    { h: 32, coral: false },
-    { h: 45, coral: false },
-    { h: 60, coral: false },
-    { h: 78, coral: false },
-    { h: 92, coral: false }, // Third peak
-    { h: 76, coral: false },
-    { h: 58, coral: true },  // Trailing coral accent
-    { h: 68, coral: true },  // Trailing coral accent
-    { h: 45, coral: false },
-    { h: 30, coral: false },
-    { h: 22, coral: false },
-    { h: 16, coral: false },
-    { h: 12, coral: false },
-    { h: 10, coral: false }
-  ];
 
   // Workload scale factor (reacts dynamically as sliders move)
   const workloadRatio = Math.min(1.5, Math.max(0.55, estimatedReviewHours / 140));
@@ -237,36 +195,7 @@ export default function RoiCalculator() {
 
                 {/* Animated Waveform Stage reacting to measurement sliders */}
                 <div className="preview-waveform-canvas">
-                  {/* Subtle Background Coordinate Grid */}
-                  <div className="grid-bg-overlay">
-                    <div className="grid-h-center"></div>
-                    <div className="grid-v-lines">
-                      {[...Array(9)].map((_, i) => (
-                        <span key={i} className="v-grid-line"></span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Reactive Voice Wave Bars */}
-                  <div className="waveform-bars-holder">
-                    {baseWaveform.map((bar, idx) => {
-                      const dynamicH = Math.min(96, Math.max(8, bar.h * workloadRatio));
-                      const isCoral = bar.coral;
-                      const delay = (idx * 0.04) % 0.7;
-
-                      return (
-                        <div key={idx} className="wave-bar-wrapper">
-                          <span 
-                            className={`wave-meas-bar ${isCoral ? 'coral-bar' : 'cyan-bar'}`}
-                            style={{
-                              height: `${dynamicH}%`,
-                              animationDelay: `${delay}s`
-                            }}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
+                  <VoiceSignalRunningCanvas workloadRatio={workloadRatio} />
                 </div>
               </div>
 
@@ -580,89 +509,14 @@ export default function RoiCalculator() {
 
         .preview-waveform-canvas {
           position: relative;
-          height: 64px;
-          background: rgba(2, 6, 23, 0.85);
+          height: 72px;
+          background: rgba(2, 6, 23, 0.9);
           border-radius: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(56, 189, 248, 0.12);
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 6px 12px;
           overflow: hidden;
-        }
-
-        .grid-bg-overlay {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-        }
-
-        .grid-h-center {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 50%;
-          height: 1px;
-          background: rgba(255, 255, 255, 0.08);
-        }
-
-        .grid-v-lines {
-          display: flex;
-          justify-content: space-between;
-          height: 100%;
-          padding: 0 10px;
-        }
-
-        .v-grid-line {
-          width: 1px;
-          height: 100%;
-          background: rgba(56, 189, 248, 0.04);
-        }
-
-        .waveform-bars-holder {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          height: 100%;
-          gap: 2.5px;
-          position: relative;
-          z-index: 2;
-        }
-
-        .wave-bar-wrapper {
-          flex: 1;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .wave-meas-bar {
-          width: 100%;
-          max-width: 4px;
-          border-radius: 2px;
-          transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-          animation: barOscillate 1.6s ease-in-out infinite alternate;
-        }
-
-        .wave-meas-bar.cyan-bar {
-          background-color: #38BDF8;
-          box-shadow: 0 0 6px rgba(56, 189, 248, 0.4);
-        }
-
-        .wave-meas-bar.coral-bar {
-          background-color: #E85A2A;
-          box-shadow: 0 0 6px rgba(232, 90, 42, 0.5);
-        }
-
-        @keyframes barOscillate {
-          0% {
-            transform: scaleY(0.85);
-          }
-          100% {
-            transform: scaleY(1.15);
-          }
         }
 
         /* CTA Button */
