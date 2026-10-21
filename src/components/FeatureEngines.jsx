@@ -4,429 +4,422 @@ import React, { useState } from 'react';
 import { 
   ChevronLeft, 
   ChevronRight, 
-  Cpu, 
-  Layers, 
-  Zap, 
-  Activity, 
-  ArrowUpRight,
-  TrendingDown,
-  Clock,
-  Gauge
+  Mic, 
+  FileText, 
+  BarChart3, 
+  CheckCircle2, 
+  ArrowRight,
+  Upload,
+  UserCheck,
+  TrendingUp,
+  Tag
 } from 'lucide-react';
 
-const ENGINES = [
+const CAPABILITIES = [
   {
-    id: 'slicing',
-    tag: 'HARDWARE VIRTUALIZATION',
-    dateBadge: 'SUB-10MS GRANULARITY',
-    title: 'Dynamic GPU Slicing & Sub-Instance Virtualization',
+    id: 'management',
+    category: 'CONVERSATION MANAGEMENT',
+    badge: 'CENTRALIZED RECORDS',
+    title: 'Keep every conversation in context',
+    image: '/images/control-room.jpg',
+    description: 'Upload audio recordings and organize them with conversation details, team assignments, categories, and outcomes. Keep the original recording connected to its transcript and review history.',
+    supportingLabels: [
+      { label: 'Audio Uploads', icon: Upload },
+      { label: 'Conversation Metadata', icon: Tag },
+      { label: 'Processing Status', icon: CheckCircle2 }
+    ],
+    bottomLabel: 'One workspace for your voice records',
+    link: 'Explore Conversation Management',
+    href: '#workspace'
+  },
+  {
+    id: 'review',
+    category: 'TRANSCRIPT REVIEW',
+    badge: 'HUMAN VERIFICATION',
+    title: 'Review transcripts with confidence',
     image: '/images/gpu-slicing.jpg',
-    description: 'Fractional partitioning of physical NVIDIA H100/A100 silicon into micro-vGPUs. Bin-pack mixed batch jobs without memory leaks or compute starvation.',
-    kpis: [
-      { label: 'VRAM Granularity', value: '1.25 GB' },
-      { label: 'Concurrency Boost', value: '3.4x' },
-      { label: 'Compute Utilization', value: '94.8%' }
+    description: 'Review generated or imported transcripts, correct wording, and track verification status. Help reviewers distinguish automated output from content checked by a person.',
+    supportingLabels: [
+      { label: 'Transcript Corrections', icon: FileText },
+      { label: 'Verification Status', icon: UserCheck },
+      { label: 'Review History', icon: CheckCircle2 }
     ],
-    highlight: 'Zero recompilation needed'
+    bottomLabel: 'Clear ownership throughout the review process',
+    link: 'Explore Transcript Review',
+    href: '#workspace'
   },
   {
-    id: 'caching',
-    tag: 'INFERENCE ACCELERATION',
-    dateBadge: '99.4% CACHE HIT RATE',
-    title: 'Distributed KV-Cache Sharing & Context Compression',
+    id: 'analytics',
+    category: 'CONVERSATION ANALYTICS',
+    badge: 'CONFIGURABLE ANALYSIS',
+    title: 'Find patterns across your conversations',
     image: '/images/token-cache.jpg',
-    description: 'Eliminates redundant pre-fill computations across chat sessions and agent loops by persisting attention key-value states in ultra-fast tiered memory.',
-    kpis: [
-      { label: 'TTFT Latency Cut', value: '-65%' },
-      { label: 'Token Throughput', value: '+380%' },
-      { label: 'Host RAM Paging', value: '3.2 ms' }
+    description: 'Use configured analysis services to identify topics, keywords, and sentiment indicators. Combine those results with team tags and recorded outcomes to explore communication trends.',
+    supportingLabels: [
+      { label: 'Topic Analysis', icon: BarChart3 },
+      { label: 'Keyword Tracking', icon: Tag },
+      { label: 'Outcome Reporting', icon: TrendingUp }
     ],
-    highlight: 'vLLM & TensorRT-LLM Native'
-  },
-  {
-    id: 'spot',
-    tag: 'MULTI-CLOUD FINOPS',
-    dateBadge: 'ZERO PREEMPTION DROPS',
-    title: 'Autonomous Spot Fleet Arbitrage & Carbon Routing',
-    image: '/images/cloud-mesh.jpg',
-    description: 'Predicts cloud provider spot terminations 120 seconds in advance and migrates live model checkpoints across AWS, GCP, Azure, and CoreWeave seamlessly.',
-    kpis: [
-      { label: 'Cloud Cost Cut', value: '68%' },
-      { label: 'Preemption Recovery', value: '< 2.4s' },
-      { label: 'Carbon Avoidance', value: '34%' }
-    ],
-    highlight: 'Kubernetes & Slurm daemon'
+    bottomLabel: 'Automated indicators with review context',
+    link: 'Explore Conversation Analytics',
+    href: '#workspace'
   }
 ];
 
 export default function FeatureEngines() {
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const [activeCard, setActiveCard] = useState(0);
 
-  const scrollLeft = () => {
-    setActiveCardIndex((prev) => (prev === 0 ? ENGINES.length - 1 : prev - 1));
+  const nextSlide = () => {
+    setActiveCard((prev) => (prev + 1) % CAPABILITIES.length);
   };
 
-  const scrollRight = () => {
-    setActiveCardIndex((prev) => (prev === ENGINES.length - 1 ? 0 : prev + 1));
+  const prevSlide = () => {
+    setActiveCard((prev) => (prev - 1 + CAPABILITIES.length) % CAPABILITIES.length);
   };
 
   return (
-    <section id="engines" className="engines-section section-padding">
+    <section id="capabilities" className="capabilities-section section-padding">
       <div className="container">
-        {/* Section Header with top-right carousel arrows (matching reference image layout) */}
-        <div className="engines-header-row">
-          <div className="header-left">
-            <span className="bracket-tag">CORE ENGINES</span>
-            <h2 className="section-title">INTELLIGENT COMPUTE SCHEDULING</h2>
-            <p className="section-subtitle">
-              Engineered for frontier AI labs and high-throughput production clusters. Replace brittle static allocations with autonomous, kernel-level orchestration.
-            </p>
+        
+        {/* Section Header */}
+        <div className="section-header text-center">
+          <span className="bracket-tag">CORE CAPABILITIES</span>
+          <h2 className="section-title">FROM RECORDED CONVERSATIONS TO ORGANIZED INSIGHTS</h2>
+          
+          <div className="accent-lines center">
+            <div className="accent-line-coral"></div>
+            <div className="accent-line-blue"></div>
           </div>
 
-          {/* Reference circular navigation buttons at the top right of cards */}
-          <div className="header-right-controls">
-            <button 
-              onClick={scrollLeft} 
-              className="circle-nav-btn"
-              aria-label="Previous engine"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button 
-              onClick={scrollRight} 
-              className="circle-nav-btn"
-              aria-label="Next engine"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
+          <p className="section-subtitle center-subtitle">
+            Keep audio, transcripts, analysis, and review activity connected throughout the conversation lifecycle.
+          </p>
         </div>
 
-        {/* 3 Cards Grid (matching reference image's 3-card layout) */}
-        <div className="engines-grid">
-          {ENGINES.map((engine, idx) => (
-            <article 
-              key={engine.id} 
-              className={`engine-card ${activeCardIndex === idx ? 'card-focused' : ''}`}
-              onMouseEnter={() => setActiveCardIndex(idx)}
+        {/* 3-Card Grid */}
+        <div className="capabilities-grid">
+          {CAPABILITIES.map((card, idx) => (
+            <div 
+              key={card.id} 
+              className={`capability-card ${activeCard === idx ? 'highlighted' : ''}`}
+              onClick={() => setActiveCard(idx)}
             >
-              {/* Card Image with Blue Tag Badge */}
-              <div className="card-image-box">
+              {/* Card Image Banner */}
+              <div className="card-image-wrapper">
                 <img 
-                  src={engine.image} 
-                  alt={engine.title} 
-                  className="card-img"
-                  loading="lazy"
+                  src={card.image} 
+                  alt={card.title} 
+                  className="card-media-img"
                 />
-                <span className="card-category-badge">{engine.tag}</span>
+                <div className="card-overlay-gradient"></div>
+                <div className="card-top-strip">
+                  <span className="card-category-pill">{card.category}</span>
+                  <span className="card-badge-pill">{card.badge}</span>
+                </div>
               </div>
 
-              {/* Card Body */}
+              {/* Card Content Body */}
               <div className="card-body">
-                <div className="card-date-badge">
-                  <Clock size={12} className="card-clock-icon" />
-                  <span>{engine.dateBadge}</span>
+                <h3 className="card-title">{card.title}</h3>
+                <p className="card-desc">{card.description}</p>
+
+                {/* 3 Supporting Labels */}
+                <div className="supporting-labels-list">
+                  {card.supportingLabels.map((item, sIdx) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={sIdx} className="supporting-item">
+                        <Icon size={14} className="support-icon text-coral" />
+                        <span className="support-label">{item.label}</span>
+                      </div>
+                    );
+                  })}
                 </div>
 
-                <h3 className="card-title">{engine.title}</h3>
-
-                <p className="card-description">
-                  {engine.description}
-                </p>
-
-                {/* KPI metrics strip */}
-                <div className="card-kpi-strip">
-                  {engine.kpis.map((kpi, kIdx) => (
-                    <div key={kIdx} className="kpi-item">
-                      <span className="kpi-val">{kpi.value}</span>
-                      <span className="kpi-lbl">{kpi.label}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Card Footer */}
-                <div className="card-footer">
-                  <span className="card-highlight-pill">
-                    <Activity size={13} />
-                    {engine.highlight}
-                  </span>
-                  <a href="#architecture" className="card-explore-link" aria-label={`Explore ${engine.title}`}>
-                    <span>Specs</span>
-                    <ArrowUpRight size={16} />
+                {/* Bottom Label and Link */}
+                <div className="card-footer-strip">
+                  <span className="bottom-note">{card.bottomLabel}</span>
+                  <a href="#workspace" className="card-action-link">
+                    <span>{card.link}</span>
+                    <ArrowRight size={14} />
                   </a>
                 </div>
               </div>
-            </article>
+            </div>
           ))}
         </div>
 
-        {/* Reference Bottom Center CTA flanked by dual accent lines */}
-        <div className="engines-bottom-cta-wrapper">
-          <div className="cta-flank-line left">
-            <div className="flank-coral"></div>
-            <div className="flank-blue"></div>
-          </div>
-
-          <a href="#architecture" className="btn-coral-pill bottom-discover-btn">
-            DISCOVER FULL ARCHITECTURE
+        {/* Section Action Button */}
+        <div className="section-cta-wrap text-center">
+          <a href="#how-it-works" className="btn-coral-pill section-main-btn">
+            <span>Explore All Features</span>
+            <ArrowRight size={15} />
           </a>
-
-          <div className="cta-flank-line right">
-            <div className="flank-coral"></div>
-            <div className="flank-blue"></div>
-          </div>
         </div>
+
       </div>
 
       <style jsx>{`
-        .engines-section {
-          background-color: #F8FAFC;
-          position: relative;
+        .capabilities-section {
+          background-color: #FFFFFF;
+          padding: 90px 0 100px;
+          border-bottom: 1px solid #E2E8F0;
         }
 
-        .engines-header-row {
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          margin-bottom: 44px;
+        .section-header {
+          margin-bottom: 54px;
         }
 
-        .header-left {
-          max-width: 780px;
-        }
-
-        .header-right-controls {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        /* 3 Cards Grid */
-        .engines-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 28px;
-          margin-bottom: 56px;
-        }
-
-        .engine-card {
-          background: var(--color-white);
-          border-radius: var(--radius-lg);
-          border: 1px solid var(--color-border-light);
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 4px 12px rgba(10, 28, 54, 0.04);
-        }
-
-        .engine-card:hover, .engine-card.card-focused {
-          transform: translateY(-6px);
-          box-shadow: 0 20px 35px -8px rgba(10, 28, 54, 0.12);
-          border-color: rgba(232, 90, 42, 0.4);
-        }
-
-        /* Card Image Box */
-        .card-image-box {
-          position: relative;
-          width: 100%;
-          height: 220px;
-          overflow: hidden;
-          background-color: var(--color-navy-darkest);
-        }
-
-        .card-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .engine-card:hover .card-img {
-          transform: scale(1.08);
-        }
-
-        /* Blue category tag badge (directly matching the reference blue badges) */
-        .card-category-badge {
-          position: absolute;
-          bottom: 14px;
-          left: 16px;
-          background: #3B82F6;
-          color: var(--color-white);
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          padding: 4px 12px;
-          border-radius: var(--radius-sm);
-          text-transform: uppercase;
-          box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+        .bracket-tag {
+          display: inline-block;
           font-family: var(--font-mono);
-        }
-
-        /* Card Body */
-        .card-body {
-          padding: 24px;
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-        }
-
-        .card-date-badge {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          color: #64748B;
-          font-size: 0.72rem;
+          font-size: 0.78rem;
           font-weight: 700;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          margin-bottom: 8px;
-          font-family: var(--font-mono);
-        }
-
-        .card-clock-icon {
-          color: var(--color-coral);
-        }
-
-        .card-title {
-          font-size: 1.25rem;
-          font-weight: 800;
-          line-height: 1.3;
-          color: var(--color-navy-primary);
+          color: #E85A2A;
+          letter-spacing: 0.12em;
           margin-bottom: 12px;
-          min-height: 58px;
-        }
-
-        .card-description {
-          font-size: 0.92rem;
-          line-height: 1.55;
-          color: #475569;
-          margin-bottom: 20px;
-          flex: 1;
-        }
-
-        /* KPI Strip */
-        .card-kpi-strip {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          background: #F1F5F9;
-          border-radius: var(--radius-md);
-          padding: 10px 12px;
-          gap: 8px;
-          margin-bottom: 18px;
-        }
-
-        .kpi-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-
-        .kpi-val {
-          font-size: 1.15rem;
-          font-weight: 800;
-          color: var(--color-navy-primary);
-          font-family: var(--font-mono);
-        }
-
-        .kpi-lbl {
-          font-size: 0.65rem;
-          font-weight: 600;
-          color: #64748B;
-          line-height: 1.1;
-          margin-top: 2px;
-        }
-
-        /* Card Footer */
-        .card-footer {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          border-top: 1px solid #F1F5F9;
-          padding-top: 14px;
-        }
-
-        .card-highlight-pill {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          color: #0284C7;
-          background: #E0F2FE;
-          padding: 4px 10px;
+          background: rgba(232, 90, 42, 0.08);
+          padding: 4px 12px;
           border-radius: var(--radius-full);
-          font-family: var(--font-mono);
+          border: 1px solid rgba(232, 90, 42, 0.2);
         }
 
-        .card-explore-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 4px;
-          color: var(--color-navy-primary);
-          font-size: 0.82rem;
-          font-weight: 700;
-          transition: color 0.2s;
+        .section-title {
+          font-family: var(--font-primary);
+          font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+          font-weight: 800;
+          color: #0A1C36;
+          letter-spacing: -0.025em;
+          margin-bottom: 16px;
         }
 
-        .card-explore-link:hover {
-          color: var(--color-coral);
-        }
-
-        /* Bottom Center CTA with reference flanking dual lines */
-        .engines-bottom-cta-wrapper {
+        .accent-lines.center {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 24px;
+          gap: 8px;
+          margin: 14px auto 20px;
         }
 
-        .cta-flank-line {
+        .accent-line-coral {
+          width: 48px;
+          height: 3px;
+          background-color: #E85A2A;
+          border-radius: 2px;
+        }
+
+        .accent-line-blue {
+          width: 48px;
+          height: 3px;
+          background-color: #38BDF8;
+          border-radius: 2px;
+        }
+
+        .section-subtitle.center-subtitle {
+          max-width: 680px;
+          margin: 0 auto;
+          color: #64748B;
+          font-size: 1.05rem;
+          line-height: 1.6;
+        }
+
+        /* 3-Card Grid */
+        .capabilities-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 28px;
+          margin-bottom: 54px;
+        }
+
+        .capability-card {
+          background: #FFFFFF;
+          border: 1px solid #E2E8F0;
+          border-radius: 18px;
+          overflow: hidden;
           display: flex;
           flex-direction: column;
-          gap: 3px;
-          width: 140px;
+          box-shadow: 0 4px 20px rgba(10, 28, 54, 0.05);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .flank-coral {
-          height: 2px;
-          background-color: var(--color-coral);
+        .capability-card:hover {
+          transform: translateY(-6px);
+          border-color: #CBD5E1;
+          box-shadow: 0 16px 36px rgba(10, 28, 54, 0.12);
+        }
+
+        .card-image-wrapper {
+          position: relative;
           width: 100%;
+          height: 190px;
+          overflow: hidden;
+          background: #0A1C36;
         }
 
-        .flank-blue {
-          height: 2px;
-          background-color: #93C5FD;
-          width: 70%;
+        .card-media-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s ease;
         }
 
-        .cta-flank-line.right .flank-blue {
-          margin-left: auto;
+        .capability-card:hover .card-media-img {
+          transform: scale(1.06);
         }
 
-        .bottom-discover-btn {
-          font-size: 0.9rem;
+        .card-overlay-gradient {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(10, 28, 54, 0.3) 0%, rgba(10, 28, 54, 0.85) 100%);
+        }
+
+        .card-top-strip {
+          position: absolute;
+          top: 14px;
+          left: 14px;
+          right: 14px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          z-index: 2;
+        }
+
+        .card-category-pill {
+          background: rgba(10, 28, 54, 0.85);
+          backdrop-filter: blur(8px);
+          color: #FFFFFF;
+          font-family: var(--font-mono);
+          font-size: 0.68rem;
+          font-weight: 700;
+          padding: 4px 10px;
+          border-radius: var(--radius-full);
+          border: 1px solid rgba(255, 255, 255, 0.2);
           letter-spacing: 0.04em;
         }
 
-        @media (max-width: 1024px) {
-          .engines-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+        .card-badge-pill {
+          background: #E85A2A;
+          color: #FFFFFF;
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          font-weight: 700;
+          padding: 4px 9px;
+          border-radius: var(--radius-full);
+          letter-spacing: 0.04em;
         }
 
-        @media (max-width: 768px) {
-          .engines-header-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 20px;
-          }
-          .engines-grid {
+        .card-body {
+          padding: 26px 24px;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
+
+        .card-title {
+          font-family: var(--font-primary);
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: #0A1C36;
+          line-height: 1.3;
+          margin-bottom: 12px;
+        }
+
+        .card-desc {
+          font-size: 0.94rem;
+          line-height: 1.6;
+          color: #475569;
+          margin-bottom: 22px;
+          flex: 1;
+        }
+
+        /* Supporting Labels */
+        .supporting-labels-list {
+          display: flex;
+          flex-direction: column;
+          gap: 9px;
+          padding: 14px;
+          background: #F8FAFC;
+          border-radius: 12px;
+          border: 1px solid #EEF2F6;
+          margin-bottom: 20px;
+        }
+
+        .supporting-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.82rem;
+          font-weight: 600;
+          color: #1E293B;
+        }
+
+        .text-coral {
+          color: #E85A2A;
+        }
+
+        /* Bottom Strip */
+        .card-footer-strip {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          padding-top: 14px;
+          border-top: 1px solid #F1F5F9;
+        }
+
+        .bottom-note {
+          font-size: 0.76rem;
+          font-weight: 600;
+          color: #64748B;
+        }
+
+        .card-action-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 0.88rem;
+          font-weight: 700;
+          color: #0A1C36;
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        .card-action-link:hover {
+          color: #E85A2A;
+          transform: translateX(3px);
+        }
+
+        /* Section Main CTA */
+        .section-cta-wrap {
+          display: flex;
+          justify-content: center;
+        }
+
+        .section-main-btn {
+          font-family: var(--font-primary);
+          background: #0A1C36;
+          color: #FFFFFF;
+          padding: 14px 34px;
+          font-size: 0.94rem;
+          font-weight: 700;
+          border-radius: var(--radius-full);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 6px 20px rgba(10, 28, 54, 0.18);
+          transition: all 0.25s ease;
+        }
+
+        .section-main-btn:hover {
+          background: #E85A2A;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 24px rgba(232, 90, 42, 0.35);
+        }
+
+        @media (max-width: 1024px) {
+          .capabilities-grid {
             grid-template-columns: 1fr;
-          }
-          .cta-flank-line {
-            display: none;
+            max-width: 600px;
+            margin: 0 auto 40px;
           }
         }
       `}</style>

@@ -2,14 +2,12 @@
 
 import React from 'react';
 import { 
-  Cpu, 
+  Headphones, 
   MapPin, 
   ArrowRight, 
   ShieldCheck, 
-  Globe, 
   Activity,
-  Terminal,
-  ExternalLink
+  CheckCircle2
 } from 'lucide-react';
 
 const GithubIcon = () => (
@@ -34,35 +32,32 @@ export default function Footer() {
   return (
     <footer className="footer-section">
       <div className="container">
-        {/* Main Footer Top Grid (matching reference image footer layout) */}
+        {/* Main Footer Top Grid */}
         <div className="footer-top-grid">
-          {/* Left Column: Brand Logo, Address, and TWO signature reference buttons */}
+          {/* Brand Column */}
           <div className="footer-brand-column">
-            <a href="#" className="footer-brand-logo" aria-label="Dovell AI Home">
+            <a href="#" className="footer-brand-logo" aria-label="Dovell Home">
               <div className="footer-logo-icon">
-                <Cpu size={22} className="cyan-text" />
+                <Headphones size={22} className="coral-text" />
                 <span className="logo-sparkle"></span>
               </div>
               <div className="footer-logo-text">
-                <span className="footer-brand-name">DOVELL<span className="coral-text">.AI</span></span>
-                <span className="footer-brand-sub">ENTERPRISE KNOWLEDGE &amp; GPU PLATFORM</span>
+                <span className="footer-brand-name">DOVELL</span>
+                <span className="footer-brand-sub">VOICE INTELLIGENCE &amp; ANALYTICS</span>
               </div>
             </a>
 
-            <div className="footer-address-block">
-              <p className="address-line">Global Headquarters & AI Systems Lab</p>
-              <p className="address-line">500 Howard Street, Suite 400</p>
-              <p className="address-line">San Francisco, CA 94105 • United States</p>
-              <p className="address-line secondary-loc">Zurich Quantum Lab: Neugasse 29, 8005 Zürich</p>
-            </div>
+            <p className="brand-tagline">Voice Intelligence & Conversation Analytics</p>
+            <p className="brand-description">
+              A centralized workspace for organizing voice interactions, reviewing transcripts, and understanding conversation outcomes.
+            </p>
 
-            {/* Reference signature dual buttons: Orange Button + Light Blue Button */}
             <div className="footer-buttons-group">
               <a href="#contact" className="btn-coral-pill footer-pill-btn">
-                CONTACT US
+                Request a Demo
               </a>
-              <a href="#architecture" className="btn-blue-pill footer-pill-btn">
-                OUR PARTNERS
+              <a href="#how-it-works" className="btn-blue-pill footer-pill-btn">
+                How It Works
               </a>
             </div>
 
@@ -79,114 +74,64 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Center Column: Categorized Navigation Links */}
+          {/* Categorized Navigation Columns */}
           <div className="footer-nav-columns">
             <div className="footer-nav-col">
               <h4 className="col-title">Platform</h4>
               <ul className="footer-links-list">
-                <li><a href="#engines">GPU Slicing Engine</a></li>
-                <li><a href="#engines">KV-Cache Tiering</a></li>
-                <li><a href="#showcase">eBPF Cluster Daemon</a></li>
-                <li><a href="#engines">Spot Fleet Arbitrage</a></li>
-                <li><a href="#architecture">Kernel Architecture</a></li>
-                <li><a href="#calculator">ROI Calculator</a></li>
+                <li><a href="#capabilities">Conversation Management</a></li>
+                <li><a href="#capabilities">Audio Uploads</a></li>
+                <li><a href="#capabilities">Transcript Review</a></li>
+                <li><a href="#workspace">Search & Categories</a></li>
+                <li><a href="#capabilities">Conversation Analytics</a></li>
+                <li><a href="#workspace">Reports & Outcomes</a></li>
               </ul>
             </div>
 
             <div className="footer-nav-col">
               <h4 className="col-title">Solutions</h4>
               <ul className="footer-links-list">
-                <li><a href="#contact">LLM Inference Fleets</a></li>
-                <li><a href="#contact">Distributed Fine-Tuning</a></li>
-                <li><a href="#contact">Sovereign Air-Gapped AI</a></li>
-                <li><a href="#pricing">FinOps Cost Governance</a></li>
-                <li><a href="#pricing">Enterprise SLA</a></li>
+                <li><a href="#solutions">Customer Support</a></li>
+                <li><a href="#solutions">Contact Center Management</a></li>
+                <li><a href="#solutions">Quality Assurance</a></li>
+                <li><a href="#solutions">Business Analysis</a></li>
+                <li><a href="#solutions">Customer Experience</a></li>
+                <li><a href="#solutions">Compliance & Operations</a></li>
               </ul>
             </div>
 
             <div className="footer-nav-col">
-              <h4 className="col-title">Developers</h4>
+              <h4 className="col-title">Resources</h4>
               <ul className="footer-links-list">
-                <li><a href="#architecture">Helm Chart Docs</a></li>
-                <li><a href="#architecture">Slurm Integration</a></li>
-                <li><a href="#architecture">vLLM Optimization Guide</a></li>
-                <li><a href="#faq">Security & SOC2</a></li>
-                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#faq">FAQs</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact">Request a Demo</a></li>
+                <li><a href="#calculator">Review Estimator</a></li>
               </ul>
             </div>
-          </div>
 
-          {/* Right Column: Stylized Radar / Global Data Center Mesh with Concentric Arcs (matching reference image footer right map) */}
-          <div className="footer-map-column">
-            <div className="radar-map-container">
-              {/* Concentric Decorative SVG Arcs (directly reproducing reference footer circular arcs) */}
-              <svg className="radar-arcs-svg" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Outer concentric grid */}
-                <circle cx="140" cy="140" r="120" stroke="rgba(255, 255, 255, 0.12)" strokeWidth="1" strokeDasharray="3 3" />
-                <circle cx="140" cy="140" r="85" stroke="rgba(255, 255, 255, 0.18)" strokeWidth="1" />
-                <circle cx="140" cy="140" r="50" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="1" />
-                
-                {/* Signature reference thick orange arc */}
-                <path d="M 40 210 A 120 120 0 0 0 235 210" stroke="#E85A2A" strokeWidth="4.5" strokeLinecap="round" />
-                
-                {/* Signature reference white inner arc */}
-                <path d="M 65 190 A 90 90 0 0 0 215 190" stroke="#FFFFFF" strokeWidth="2.5" strokeDasharray="5 5" strokeLinecap="round" />
-              </svg>
-
-              {/* Stylized Node Map Overlay */}
-              <div className="radar-content-overlay">
-                <div className="map-node node-sf active">
-                  <div className="node-ping"></div>
-                  <div className="node-marker">
-                    <MapPin size={18} className="marker-pin-coral" />
-                  </div>
-                  <span className="node-label">US-West (SF)</span>
-                </div>
-
-                <div className="map-node node-va">
-                  <div className="node-marker-small"></div>
-                  <span className="node-label">US-East</span>
-                </div>
-
-                <div className="map-node node-eu">
-                  <div className="node-marker-small"></div>
-                  <span className="node-label">EU-Central</span>
-                </div>
-
-                <div className="map-node node-tyo">
-                  <div className="node-marker-small"></div>
-                  <span className="node-label">APAC</span>
-                </div>
-
-                <div className="radar-stats-tag">
-                  <Activity size={12} className="cyan-text" />
-                  <span>Global GPU Interconnect Active</span>
-                </div>
-              </div>
+            <div className="footer-nav-col">
+              <h4 className="col-title">Legal</h4>
+              <ul className="footer-links-list">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+              </ul>
             </div>
           </div>
         </div>
 
-        {/* Bottom Sub-Footer (matching reference image legal & copyright bar) */}
+        {/* Bottom Sub-Footer Bar */}
         <div className="footer-sub-bar">
           <div className="sub-left-legal">
-            <a href="#" className="sub-link">Home</a>
-            <span className="sub-dot">•</span>
-            <a href="#faq" className="sub-link">Accessibility</a>
-            <span className="sub-dot">•</span>
-            <a href="#architecture" className="sub-link">Architecture Plan</a>
-            <span className="sub-dot">•</span>
-            <a href="#faq" className="sub-link">Legal Notices</a>
-            <span className="sub-dot">•</span>
-            <a href="#faq" className="sub-link">Confidentiality</a>
-            <span className="sub-dot">•</span>
-            <span className="sub-copy">© 2026 Dovell Technologies, Inc. All rights reserved.</span>
+            <span className="sub-copy">© 2026 Dovell. All rights reserved.</span>
           </div>
 
           <div className="sub-right-status">
             <span className="status-indicator">
               <span className="pulse-dot"></span>
-              All Systems Operational
+              All Systems Operational · SOC 2 Architecture
             </span>
           </div>
         </div>
@@ -204,10 +149,10 @@ export default function Footer() {
 
         .footer-top-grid {
           display: grid;
-          grid-template-columns: 1.2fr 1.6fr 1fr;
-          gap: 50px;
+          grid-template-columns: 1.3fr 2fr;
+          gap: 60px;
           align-items: flex-start;
-          margin-bottom: 60px;
+          margin-bottom: 50px;
         }
 
         /* Brand Column */
@@ -221,7 +166,7 @@ export default function Footer() {
           align-items: center;
           gap: 12px;
           text-decoration: none;
-          margin-bottom: 20px;
+          margin-bottom: 14px;
         }
 
         .footer-logo-icon {
@@ -230,14 +175,10 @@ export default function Footer() {
           height: 38px;
           border-radius: 8px;
           background: #0F274B;
-          border: 1px solid rgba(0, 194, 255, 0.4);
+          border: 1px solid rgba(232, 90, 42, 0.4);
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-
-        .cyan-text {
-          color: var(--color-cyan);
         }
 
         .coral-text {
@@ -261,10 +202,11 @@ export default function Footer() {
         }
 
         .footer-brand-name {
-          font-size: 1.25rem;
+          font-size: 1.35rem;
           font-weight: 800;
           color: var(--color-white);
           line-height: 1.1;
+          letter-spacing: -0.01em;
         }
 
         .footer-brand-sub {
@@ -275,23 +217,21 @@ export default function Footer() {
           font-family: var(--font-mono);
         }
 
-        .footer-address-block {
-          margin-bottom: 24px;
+        .brand-tagline {
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #E2E8F0;
+          margin-bottom: 8px;
+        }
+
+        .brand-description {
+          font-size: 0.86rem;
+          color: #94A3B8;
           line-height: 1.6;
+          margin-bottom: 24px;
+          max-width: 380px;
         }
 
-        .address-line {
-          font-size: 0.84rem;
-          color: #CBD5E1;
-        }
-
-        .address-line.secondary-loc {
-          color: #64748B;
-          font-size: 0.78rem;
-          margin-top: 4px;
-        }
-
-        /* Reference Dual Buttons: Orange + Light Blue */
         .footer-buttons-group {
           display: flex;
           align-items: center;
@@ -301,9 +241,8 @@ export default function Footer() {
         }
 
         .footer-pill-btn {
-          font-size: 0.8rem;
-          padding: 10px 22px;
-          letter-spacing: 0.04em;
+          font-size: 0.82rem;
+          padding: 9px 20px;
         }
 
         .footer-social-links {
@@ -333,7 +272,7 @@ export default function Footer() {
         /* Nav Columns */
         .footer-nav-columns {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 24px;
         }
 
@@ -365,128 +304,6 @@ export default function Footer() {
           text-decoration: underline;
         }
 
-        /* Map Column (Radar with Concentric Arcs matching reference) */
-        .footer-map-column {
-          display: flex;
-          justify-content: center;
-        }
-
-        .radar-map-container {
-          position: relative;
-          width: 270px;
-          height: 270px;
-          background: radial-gradient(circle at center, #0F274B 0%, #061121 80%);
-          border-radius: 50%;
-          border: 1px solid rgba(0, 194, 255, 0.25);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-          overflow: hidden;
-        }
-
-        .radar-arcs-svg {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          pointer-events: none;
-        }
-
-        .radar-content-overlay {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .map-node {
-          position: absolute;
-          display: flex;
-          align-items: center;
-          gap: 4px;
-        }
-
-        .node-sf {
-          top: 36%;
-          left: 45%;
-        }
-
-        .marker-pin-coral {
-          color: var(--color-coral);
-          filter: drop-shadow(0 0 6px rgba(232, 90, 42, 0.8));
-          animation: bounce 2s infinite ease-in-out;
-        }
-
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
-        }
-
-        .node-ping {
-          position: absolute;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          background: rgba(232, 90, 42, 0.35);
-          animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-          top: -3px;
-          left: -3px;
-        }
-
-        @keyframes ping {
-          75%, 100% {
-            transform: scale(2.2);
-            opacity: 0;
-          }
-        }
-
-        .node-va {
-          top: 42%;
-          left: 68%;
-        }
-
-        .node-eu {
-          top: 32%;
-          left: 20%;
-        }
-
-        .node-tyo {
-          top: 55%;
-          left: 72%;
-        }
-
-        .node-marker-small {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: var(--color-cyan);
-          box-shadow: 0 0 6px var(--color-cyan);
-        }
-
-        .node-label {
-          font-family: var(--font-mono);
-          font-size: 0.62rem;
-          color: #E2E8F0;
-          background: rgba(10, 28, 54, 0.7);
-          padding: 1px 4px;
-          border-radius: 3px;
-        }
-
-        .radar-stats-tag {
-          position: absolute;
-          bottom: 22px;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          font-family: var(--font-mono);
-          font-size: 0.65rem;
-          color: #94A3B8;
-          background: rgba(6, 17, 33, 0.85);
-          padding: 4px 10px;
-          border-radius: var(--radius-full);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
         /* Sub-footer legal bar */
         .footer-sub-bar {
           border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -494,7 +311,7 @@ export default function Footer() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          font-size: 0.75rem;
+          font-size: 0.78rem;
           flex-wrap: wrap;
           gap: 16px;
         }
@@ -502,32 +319,17 @@ export default function Footer() {
         .sub-left-legal {
           display: flex;
           align-items: center;
-          flex-wrap: wrap;
           gap: 8px;
-        }
-
-        .sub-link {
-          color: #94A3B8;
-          transition: color 0.2s;
-        }
-
-        .sub-link:hover {
-          color: var(--color-white);
-        }
-
-        .sub-dot {
-          color: rgba(255, 255, 255, 0.2);
         }
 
         .sub-copy {
           color: #64748B;
-          margin-left: 6px;
         }
 
         .status-indicator {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          gap: 7px;
           color: #10B981;
           font-family: var(--font-mono);
           font-size: 0.75rem;
@@ -543,25 +345,18 @@ export default function Footer() {
 
         @media (max-width: 1024px) {
           .footer-top-grid {
-            grid-template-columns: 1fr 1fr;
-          }
-          .footer-map-column {
-            grid-column: span 2;
-            justify-content: flex-start;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .footer-top-grid {
             grid-template-columns: 1fr;
             gap: 40px;
           }
           .footer-nav-columns {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
           }
-          .footer-map-column {
-            grid-column: span 1;
-            justify-content: center;
+        }
+
+        @media (max-width: 640px) {
+          .footer-nav-columns {
+            grid-template-columns: 1fr;
           }
           .footer-sub-bar {
             flex-direction: column;

@@ -2,202 +2,310 @@
 
 import React, { useState } from 'react';
 import { 
-  Terminal, 
-  Copy, 
-  Check, 
-  Layers, 
+  Upload, 
   Cpu, 
+  UserCheck, 
+  BarChart4, 
   ArrowRight, 
-  Workflow, 
-  ShieldCheck, 
-  Zap,
-  Server
+  Check, 
+  FileText, 
+  Clock, 
+  Tag, 
+  MessageSquare
 } from 'lucide-react';
 
-const PIPELINE_STEPS = [
+const STEPS = [
   {
-    step: '01',
-    title: 'eBPF Intercept & Driver Hook',
-    tag: 'KERNEL LEVEL',
-    desc: 'Lightweight kernel probe monitors CUDA calls (cudaMalloc, cudaLaunchKernel) with zero latency impact and zero code changes.',
-    badge: '< 0.08ms overhead'
+    num: '01',
+    category: 'UPLOAD & ORGANIZE',
+    title: 'Bring your recordings together',
+    description: 'Upload supported audio files and add conversation details such as date, team, category, and reference number.',
+    status: 'Uploaded',
+    icon: Upload
   },
   {
-    step: '02',
-    title: 'Tensor Profiling & Dynamic Slicing',
-    tag: 'VIRTUALIZATION',
-    desc: 'Neural profiler predicts exact VRAM needs per forward pass, bin-packing concurrent requests into fractional GPU slices.',
-    badge: '1.25GB Granularity'
+    num: '02',
+    category: 'PROCESS & TRANSCRIBE',
+    title: 'Prepare conversations for review',
+    description: 'Track processing progress and generate transcripts through a configured transcription service, or attach an existing transcript.',
+    status: 'Processing / Ready for Review',
+    icon: Cpu
   },
   {
-    step: '03',
-    title: 'Tiered KV-Cache Persistence',
-    tag: 'MEMORY HIERARCHY',
-    desc: 'Caches common prefix attention tokens across high-speed NVMe and host DDR5 memory, eliminating redundant prefill computation.',
-    badge: '99.4% Cache Hit'
+    num: '03',
+    category: 'REVIEW & VERIFY',
+    title: 'Add human judgment',
+    description: 'Review the transcript alongside the recording, correct errors, check suggested analysis, and record reviewer notes.',
+    status: 'In Review / Verified',
+    icon: UserCheck
   },
   {
-    step: '04',
-    title: 'Spot Arbitrage & Node Failover',
-    tag: 'FINOPS ORCHESTRATION',
-    desc: 'Detects cloud spot termination signals 120 seconds in advance, live-migrating tensor checkpoints to standby instances with zero downtime.',
-    badge: '100% Zero-Loss'
+    num: '04',
+    category: 'ANALYZE & REPORT',
+    title: 'Turn reviewed records into useful reports',
+    description: 'Filter conversations by topic, team, tag, review status, or outcome. Explore recurring patterns and prepare reports for your operational needs.',
+    status: 'Ready for Reporting',
+    icon: BarChart4
   }
 ];
 
-const CODE_EXAMPLES = {
-  helm: `# 1. Add Dovell Helm repository
-helm repo add dovell https://charts.dovell.ai
-helm repo update
-
-# 2. Deploy daemonset to your GPU Kubernetes cluster
-helm install dovell-daemon dovell/gpu-autopilot \\
-  --namespace dovell-system \\
-  --create-namespace \\
-  --set cluster.name="prod-gpu-us-east" \\
-  --set licenseKey="dovell_live_98374a98f" \\
-  --set optimization.kvCacheTiering=true \\
-  --set optimization.slicingGranularity="auto"`,
-
-  slurm: `#!/bin/bash
-#SBATCH --job-name=llm-train-dovell
-#SBATCH --nodes=4
-#SBATCH --gres=gpu:8
-#SBATCH --partition=h100-spot
-
-# Launch Dovell user-space daemon wrapper
-module load cuda/12.4 dovell-daemon
-
-# Run multi-node PyTorch training with zero code changes
-dovell-run torchrun \\
-  --nproc_per_node=8 \\
-  --nnodes=4 \\
-  train_deepseek_v3.py --config config.yaml`,
-
-  docker: `# Dockerfile / Compose integration
-FROM vllm/vllm-openai:latest
-
-# Inject Dovell autonomous runtime shim
-RUN curl -sSL https://get.dovell.ai | bash
-
-ENV DOVELL_ENABLE_SLICING=1
-ENV DOVELL_KV_TIERING=nvme,ddr5
-
-ENTRYPOINT ["dovell-exec", "python3", "-m", "vllm.entrypoints.openai.api_server"]`
-};
-
 export default function ArchitecturePipeline() {
-  const [activeTab, setActiveTab] = useState('helm');
-  const [copied, setCopied] = useState(false);
-
-  const copyCode = () => {
-    navigator.clipboard.writeText(CODE_EXAMPLES[activeTab]);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const [activeTab, setActiveTab] = useState('record');
 
   return (
-    <section id="architecture" className="architecture-section section-padding">
+    <section id="how-it-works" className="how-it-works-section section-padding">
       <div className="container">
+        
+        {/* Section Header */}
         <div className="section-header text-center">
-          <span className="bracket-tag">UNDER THE HOOD</span>
-          <h2 className="section-title">HOW DOVELL OPTIMIZES AT THE HARDWARE LAYER</h2>
+          <span className="bracket-tag">HOW DOVELL WORKS</span>
+          <h2 className="section-title">A CLEAR PATH FROM AUDIO UPLOAD TO REVIEWED INSIGHTS</h2>
+          
+          <div className="accent-lines center">
+            <div className="accent-line-coral"></div>
+            <div className="accent-line-blue"></div>
+          </div>
+
           <p className="section-subtitle center-subtitle">
-            Operating beneath frameworks like PyTorch, vLLM, and Triton, Dovell optimizes GPU hardware allocations transparently with micro-second precision.
+            Keep each stage visible, with processing statuses and review checkpoints that help your team understand what is ready and what needs attention.
           </p>
         </div>
 
-        {/* 4 Step Pipeline Grid */}
-        <div className="pipeline-steps-grid">
-          {PIPELINE_STEPS.map((item, idx) => (
-            <div key={idx} className="step-card">
-              <div className="step-top-row">
-                <span className="step-number">{item.step}</span>
-                <span className="step-tag-pill">{item.tag}</span>
+        {/* 4-Step Pipeline Grid */}
+        <div className="steps-grid">
+          {STEPS.map((step) => {
+            const Icon = step.icon;
+            return (
+              <div key={step.num} className="step-card">
+                <div className="step-top-row">
+                  <span className="step-number">{step.num}</span>
+                  <div className="step-icon-badge">
+                    <Icon size={16} />
+                  </div>
+                </div>
+
+                <span className="step-category-pill">{step.category}</span>
+                <h3 className="step-title">{step.title}</h3>
+                <p className="step-desc">{step.description}</p>
+
+                <div className="step-status-footer">
+                  <span className="status-label-tag">{step.status}</span>
+                </div>
               </div>
-              <h3 className="step-title">{item.title}</h3>
-              <p className="step-desc">{item.desc}</p>
-              <div className="step-badge-row">
-                <span className="step-highlight-badge">{item.badge}</span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Deployment Code Showcase */}
-        <div className="code-showcase-box">
-          <div className="code-header">
-            <div className="code-tabs">
+        {/* 3-Tab Workflow Preview Panel */}
+        <div className="workflow-preview-panel">
+          
+          {/* Tabs Navigation Header */}
+          <div className="tabs-header">
+            <div className="tabs-list">
               <button 
-                onClick={() => setActiveTab('helm')}
-                className={`code-tab-btn ${activeTab === 'helm' ? 'active' : ''}`}
+                type="button"
+                className={`tab-btn ${activeTab === 'record' ? 'active' : ''}`}
+                onClick={() => setActiveTab('record')}
               >
-                Kubernetes Helm
+                <FileText size={14} />
+                <span>Conversation Record</span>
               </button>
+
               <button 
-                onClick={() => setActiveTab('slurm')}
-                className={`code-tab-btn ${activeTab === 'slurm' ? 'active' : ''}`}
+                type="button"
+                className={`tab-btn ${activeTab === 'transcript' ? 'active' : ''}`}
+                onClick={() => setActiveTab('transcript')}
               >
-                Slurm Cluster Script
+                <MessageSquare size={14} />
+                <span>Transcript Review</span>
               </button>
+
               <button 
-                onClick={() => setActiveTab('docker')}
-                className={`code-tab-btn ${activeTab === 'docker' ? 'active' : ''}`}
+                type="button"
+                className={`tab-btn ${activeTab === 'analysis' ? 'active' : ''}`}
+                onClick={() => setActiveTab('analysis')}
               >
-                Docker / vLLM Shim
+                <Tag size={14} />
+                <span>Analysis &amp; Outcome</span>
               </button>
             </div>
 
-            <button onClick={copyCode} className="copy-btn" aria-label="Copy installation command">
-              {copied ? (
-                <>
-                  <Check size={14} className="text-green" />
-                  <span>Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy size={14} />
-                  <span>Copy Config</span>
-                </>
-              )}
-            </button>
-          </div>
-
-          <div className="code-terminal-body">
-            <pre className="code-pre">
-              <code>{CODE_EXAMPLES[activeTab]}</code>
-            </pre>
-          </div>
-
-          <div className="code-footer-bar">
-            <div className="terminal-status-left">
-              <span className="pulse-dot"></span>
-              <span>Compatible with Linux x86_64, aarch64, CUDA 11.8 - 12.6+</span>
-            </div>
-            <a href="#contact" className="terminal-cta-link">
-              <span>Read Deployment Guide</span>
+            <a href="#contact" className="panel-cta-btn">
+              <span>Explore the Workflow</span>
               <ArrowRight size={14} />
             </a>
           </div>
+
+          {/* Tab Content Box */}
+          <div className="tab-content-body">
+            {activeTab === 'record' && (
+              <div className="tab-pane-view">
+                <div className="record-details-grid">
+                  <div className="record-field">
+                    <span className="field-key">Conversation</span>
+                    <span className="field-val highlight">Billing Follow-up</span>
+                  </div>
+                  <div className="record-field">
+                    <span className="field-key">Category</span>
+                    <span className="field-val">Customer Support</span>
+                  </div>
+                  <div className="record-field">
+                    <span className="field-key">Transcript</span>
+                    <span className="status-pill-verified">
+                      <Check size={12} />
+                      <span>Human Verified</span>
+                    </span>
+                  </div>
+                  <div className="record-field">
+                    <span className="field-key">Suggested Topic</span>
+                    <span className="field-val">Invoice Clarification</span>
+                  </div>
+                </div>
+
+                <div className="review-notes-box">
+                  <span className="notes-key">Review Note:</span>
+                  <p className="notes-text">
+                    &ldquo;Customer requested an explanation of the latest charge. Verified line items against account history.&rdquo;
+                  </p>
+                </div>
+
+                <div className="outcome-strip">
+                  <span className="outcome-key">Outcome:</span>
+                  <span className="outcome-val-pill">Follow-up Required</span>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'transcript' && (
+              <div className="tab-pane-view">
+                <div className="transcript-review-view">
+                  <div className="transcript-meta-row">
+                    <span className="audio-channel">Speaker 01 (Agent) &amp; Speaker 02 (Customer)</span>
+                    <span className="verification-status-tag">Human Verification: Complete</span>
+                  </div>
+
+                  <div className="dialogue-flow">
+                    <div className="dialogue-bubble agent">
+                      <span className="speaker-name">Agent [00:12]:</span>
+                      <p className="dialogue-text">
+                        Thank you for calling Dovell Support. How may I assist you with your invoice today?
+                      </p>
+                    </div>
+                    <div className="dialogue-bubble customer">
+                      <span className="speaker-name">Customer [00:24]:</span>
+                      <p className="dialogue-text">
+                        Hi, I noticed a discrepancy in my latest billing summary under the tier add-on. Could we clarify that charge?
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="transcript-correction-note">
+                    <Check size={14} className="text-emerald" />
+                    <span>Reviewer verified transcript against audio timestamp 00:24. Status marked as Verified.</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'analysis' && (
+              <div className="tab-pane-view">
+                <div className="analysis-summary-view">
+                  <div className="analysis-tags-grid">
+                    <div className="analysis-tag-box">
+                      <span className="tag-header">Suggested Topic</span>
+                      <span className="tag-body">Invoice Clarification</span>
+                    </div>
+                    <div className="analysis-tag-box">
+                      <span className="tag-header">Keywords Detected</span>
+                      <span className="tag-body">Billing, Charge, Tier, Discrepancy</span>
+                    </div>
+                    <div className="analysis-tag-box">
+                      <span className="tag-header">Sentiment Indicator</span>
+                      <span className="tag-body">Neutral · Constructive</span>
+                    </div>
+                  </div>
+
+                  <div className="outcome-assignment-box">
+                    <span className="box-title">Follow-up Routing:</span>
+                    <p className="box-desc">
+                      Follow-up Required — Assigned to Customer Support Tier 2 for billing adjustment review.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
         </div>
+
       </div>
 
       <style jsx>{`
-        .architecture-section {
-          background-color: #F8FAFC;
+        .how-it-works-section {
+          background-color: #FFFFFF;
+          padding: 90px 0 100px;
+          border-bottom: 1px solid #E2E8F0;
         }
 
-        .text-center {
-          text-align: center;
+        .section-header {
+          margin-bottom: 54px;
         }
 
-        .center-subtitle {
-          margin-left: auto;
-          margin-right: auto;
+        .bracket-tag {
+          display: inline-block;
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: #E85A2A;
+          letter-spacing: 0.12em;
+          margin-bottom: 12px;
+          background: rgba(232, 90, 42, 0.08);
+          padding: 4px 12px;
+          border-radius: var(--radius-full);
+          border: 1px solid rgba(232, 90, 42, 0.2);
         }
 
-        /* 4 Step Pipeline */
-        .pipeline-steps-grid {
+        .section-title {
+          font-family: var(--font-primary);
+          font-size: clamp(1.8rem, 2.7vw, 2.5rem);
+          font-weight: 800;
+          color: #0A1C36;
+          letter-spacing: -0.025em;
+          margin-bottom: 16px;
+        }
+
+        .accent-lines.center {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          margin: 14px auto 20px;
+        }
+
+        .accent-line-coral {
+          width: 48px;
+          height: 3px;
+          background-color: #E85A2A;
+          border-radius: 2px;
+        }
+
+        .accent-line-blue {
+          width: 48px;
+          height: 3px;
+          background-color: #38BDF8;
+          border-radius: 2px;
+        }
+
+        .section-subtitle.center-subtitle {
+          max-width: 680px;
+          margin: 0 auto;
+          color: #64748B;
+          font-size: 1.05rem;
+          line-height: 1.6;
+        }
+
+        /* 4-Step Pipeline Grid */
+        .steps-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 20px;
@@ -205,20 +313,19 @@ export default function ArchitecturePipeline() {
         }
 
         .step-card {
-          background: var(--color-white);
-          border: 1px solid var(--color-border-light);
-          border-radius: var(--radius-lg);
-          padding: 24px 20px;
+          background: #F8FAFC;
+          border: 1px solid #E2E8F0;
+          border-radius: 16px;
+          padding: 24px;
           display: flex;
           flex-direction: column;
-          position: relative;
-          transition: all 0.3s ease;
+          transition: all 0.25s ease;
         }
 
         .step-card:hover {
           transform: translateY(-4px);
-          border-color: var(--color-coral);
-          box-shadow: 0 12px 28px rgba(10, 28, 54, 0.08);
+          border-color: #CBD5E1;
+          box-shadow: 0 10px 24px rgba(10, 28, 54, 0.08);
         }
 
         .step-top-row {
@@ -229,189 +336,358 @@ export default function ArchitecturePipeline() {
         }
 
         .step-number {
-          font-size: 1.6rem;
-          font-weight: 900;
-          color: var(--color-coral);
           font-family: var(--font-mono);
-          line-height: 1;
+          font-size: 1.4rem;
+          font-weight: 900;
+          color: #0A1C36;
+          opacity: 0.85;
         }
 
-        .step-tag-pill {
-          font-size: 0.65rem;
-          font-weight: 700;
-          background: #EEF2F6;
-          color: #475569;
-          padding: 3px 8px;
-          border-radius: var(--radius-sm);
+        .step-icon-badge {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background: rgba(232, 90, 42, 0.1);
+          color: #E85A2A;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .step-category-pill {
           font-family: var(--font-mono);
+          font-size: 0.68rem;
+          font-weight: 700;
+          color: #64748B;
+          letter-spacing: 0.06em;
+          margin-bottom: 8px;
         }
 
         .step-title {
+          font-family: var(--font-primary);
           font-size: 1.05rem;
           font-weight: 800;
-          color: var(--color-navy-primary);
-          line-height: 1.3;
+          color: #0A1C36;
+          line-height: 1.35;
           margin-bottom: 10px;
         }
 
         .step-desc {
-          font-size: 0.85rem;
-          color: #64748B;
-          line-height: 1.5;
-          margin-bottom: 16px;
+          font-size: 0.86rem;
+          line-height: 1.55;
+          color: #475569;
+          margin-bottom: 18px;
           flex: 1;
         }
 
-        .step-badge-row {
-          padding-top: 10px;
-          border-top: 1px solid #F1F5F9;
+        .step-status-footer {
+          padding-top: 12px;
+          border-top: 1px solid #E2E8F0;
         }
 
-        .step-highlight-badge {
-          display: inline-block;
+        .status-label-tag {
+          font-family: var(--font-mono);
           font-size: 0.72rem;
           font-weight: 700;
-          color: #0369A1;
-          background: #E0F2FE;
-          padding: 3px 10px;
-          border-radius: var(--radius-full);
-          font-family: var(--font-mono);
+          color: #0284C7;
+          background: rgba(2, 132, 199, 0.08);
+          padding: 3px 8px;
+          border-radius: 4px;
+          display: inline-block;
         }
 
-        /* Code Showcase Box */
-        .code-showcase-box {
+        /* 3-Tab Workflow Preview Panel */
+        .workflow-preview-panel {
           background: #0A1C36;
-          border-radius: var(--radius-lg);
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 20px;
           overflow: hidden;
-          box-shadow: 0 20px 40px rgba(10, 28, 54, 0.2);
+          box-shadow: 0 16px 40px rgba(10, 28, 54, 0.18);
         }
 
-        .code-header {
+        .tabs-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: #061121;
-          padding: 12px 20px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .code-tabs {
-          display: flex;
-          gap: 8px;
-        }
-
-        .code-tab-btn {
-          font-size: 0.82rem;
-          font-weight: 600;
-          color: #94A3B8;
-          padding: 6px 14px;
-          border-radius: var(--radius-sm);
-          transition: all 0.2s ease;
-        }
-
-        .code-tab-btn:hover {
-          color: var(--color-white);
-        }
-
-        .code-tab-btn.active {
-          background: var(--color-navy-card);
-          color: var(--color-cyan);
-          border: 1px solid rgba(0, 194, 255, 0.3);
-        }
-
-        .copy-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          font-size: 0.78rem;
-          color: #CBD5E1;
-          background: rgba(255, 255, 255, 0.08);
-          padding: 6px 12px;
-          border-radius: var(--radius-sm);
-          transition: all 0.2s ease;
-        }
-
-        .copy-btn:hover {
-          background: rgba(255, 255, 255, 0.16);
-          color: var(--color-white);
-        }
-
-        .text-green {
-          color: #10B981;
-        }
-
-        .code-terminal-body {
-          padding: 24px;
-          overflow-x: auto;
-        }
-
-        .code-pre {
-          font-family: var(--font-mono);
-          font-size: 0.85rem;
-          line-height: 1.6;
-          color: #E2E8F0;
-          margin: 0;
-        }
-
-        .code-footer-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          background: #061121;
+          background: rgba(0, 0, 0, 0.25);
           padding: 12px 24px;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
-          font-size: 0.78rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          flex-wrap: wrap;
+          gap: 12px;
         }
 
-        .terminal-status-left {
+        .tabs-list {
           display: flex;
           align-items: center;
           gap: 8px;
+        }
+
+        .tab-btn {
+          font-family: var(--font-primary);
+          font-size: 0.84rem;
+          font-weight: 600;
           color: #94A3B8;
-          font-family: var(--font-mono);
+          padding: 8px 16px;
+          border-radius: var(--radius-full);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.2s ease;
         }
 
-        .pulse-dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #10B981;
-          box-shadow: 0 0 6px #10B981;
+        .tab-btn:hover {
+          color: #FFFFFF;
         }
 
-        .terminal-cta-link {
+        .tab-btn.active {
+          background: rgba(255, 255, 255, 0.12);
+          color: #FFFFFF;
+          font-weight: 700;
+        }
+
+        .panel-cta-btn {
+          font-family: var(--font-primary);
+          background: #E85A2A;
+          color: #FFFFFF;
+          font-size: 0.82rem;
+          font-weight: 700;
+          padding: 8px 18px;
+          border-radius: var(--radius-full);
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          color: var(--color-coral);
+          text-decoration: none;
+          transition: all 0.2s ease;
+        }
+
+        .panel-cta-btn:hover {
+          background: #D0481B;
+        }
+
+        .tab-content-body {
+          padding: 32px 30px;
+          color: #FFFFFF;
+        }
+
+        .record-details-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+          margin-bottom: 24px;
+        }
+
+        .record-field {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          padding: 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .field-key {
+          font-size: 0.72rem;
+          color: #94A3B8;
+          font-weight: 500;
+        }
+
+        .field-val {
+          font-size: 0.92rem;
+          font-weight: 700;
+          color: #FFFFFF;
+        }
+
+        .field-val.highlight {
+          color: #38BDF8;
+        }
+
+        .status-pill-verified {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 0.78rem;
+          font-weight: 700;
+          color: #34D399;
+          background: rgba(52, 211, 153, 0.15);
+          padding: 3px 8px;
+          border-radius: var(--radius-full);
+          width: fit-content;
+        }
+
+        .review-notes-box {
+          background: rgba(255, 255, 255, 0.04);
+          border-left: 3px solid #E85A2A;
+          border-radius: 0 10px 10px 0;
+          padding: 14px 18px;
+          margin-bottom: 20px;
+        }
+
+        .notes-key {
+          font-size: 0.76rem;
+          font-weight: 700;
+          color: #E85A2A;
+          display: block;
+          margin-bottom: 4px;
+        }
+
+        .notes-text {
+          font-size: 0.88rem;
+          color: #E2E8F0;
+          font-style: italic;
+          line-height: 1.5;
+        }
+
+        .outcome-strip {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .outcome-key {
+          font-size: 0.82rem;
+          color: #94A3B8;
           font-weight: 600;
-          transition: color 0.2s;
         }
 
-        .terminal-cta-link:hover {
-          color: #FF7043;
+        .outcome-val-pill {
+          background: rgba(248, 113, 113, 0.18);
+          border: 1px solid rgba(248, 113, 113, 0.4);
+          color: #F87171;
+          font-size: 0.78rem;
+          font-weight: 700;
+          padding: 4px 12px;
+          border-radius: var(--radius-full);
         }
 
-        @media (max-width: 992px) {
-          .pipeline-steps-grid {
-            grid-template-columns: repeat(2, 1fr);
+        /* Dialogue styling for Transcript Tab */
+        .transcript-meta-row {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.76rem;
+          color: #94A3B8;
+          margin-bottom: 16px;
+        }
+
+        .verification-status-tag {
+          color: #34D399;
+          font-weight: 600;
+        }
+
+        .dialogue-flow {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-bottom: 18px;
+        }
+
+        .dialogue-bubble {
+          padding: 12px 16px;
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        .dialogue-bubble.agent {
+          border-left: 3px solid #38BDF8;
+        }
+
+        .dialogue-bubble.customer {
+          border-left: 3px solid #A78BFA;
+        }
+
+        .speaker-name {
+          font-size: 0.74rem;
+          font-weight: 700;
+          color: #94A3B8;
+          display: block;
+          margin-bottom: 4px;
+        }
+
+        .dialogue-text {
+          font-size: 0.88rem;
+          color: #FFFFFF;
+          line-height: 1.5;
+        }
+
+        .transcript-correction-note {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.78rem;
+          color: #94A3B8;
+          padding: 10px 14px;
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 8px;
+        }
+
+        .text-emerald {
+          color: #34D399;
+        }
+
+        /* Analysis Tab */
+        .analysis-tags-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 14px;
+          margin-bottom: 20px;
+        }
+
+        .analysis-tag-box {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          padding: 14px;
+        }
+
+        .tag-header {
+          font-size: 0.72rem;
+          color: #94A3B8;
+          display: block;
+          margin-bottom: 4px;
+        }
+
+        .tag-body {
+          font-size: 0.88rem;
+          font-weight: 700;
+          color: #38BDF8;
+        }
+
+        .outcome-assignment-box {
+          background: rgba(255, 255, 255, 0.04);
+          border-radius: 10px;
+          padding: 14px;
+        }
+
+        .box-title {
+          font-size: 0.76rem;
+          font-weight: 700;
+          color: #CBD5E1;
+          display: block;
+          margin-bottom: 4px;
+        }
+
+        .box-desc {
+          font-size: 0.86rem;
+          color: #E2E8F0;
+        }
+
+        @media (max-width: 1024px) {
+          .steps-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+          .record-details-grid {
+            grid-template-columns: 1fr 1fr;
           }
         }
 
         @media (max-width: 640px) {
-          .pipeline-steps-grid {
+          .steps-grid {
             grid-template-columns: 1fr;
           }
-          .code-header {
-            flex-direction: column;
-            gap: 12px;
-            align-items: flex-start;
+          .record-details-grid {
+            grid-template-columns: 1fr;
           }
-          .code-footer-bar {
-            flex-direction: column;
-            gap: 10px;
-            align-items: flex-start;
+          .analysis-tags-grid {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

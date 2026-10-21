@@ -1,10 +1,10 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Dovell AI | Autonomous Enterprise Knowledge & GPU Optimization Platform',
-  description: 'Dovell AI connects enterprise silos, maps dependencies, and navigates complex relationships with GPU-accelerated relationship analytics and autonomous compute optimization.',
-  keywords: 'Dovell AI, Knowledge Graph, Enterprise Silos, GPU Slicing, AI Resource Optimization, Cloud AI Infrastructure',
-  authors: [{ name: 'Dovell Technologies' }],
+  title: 'Dovell | Voice Intelligence & Conversation Analytics',
+  description: 'Organize audio recordings, review transcripts, explore conversation trends, and track outcomes with Dovell’s centralized voice analytics workspace.',
+  keywords: 'Voice Intelligence, Conversation Analytics, Audio Recordings, Transcript Review, Customer Support Analytics, Dovell',
+  authors: [{ name: 'Dovell' }],
   icons: {
     icon: '/favicon.ico',
   },

@@ -5,63 +5,71 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  HelpCircle,
+  CheckCircle2
 } from 'lucide-react';
 
 const FAQ_ITEMS = [
   {
     id: 1,
-    category: 'HARDWARE VIRTUALIZATION',
-    shortCategory: 'Hardware Virtualization',
-    question: 'How does Dovell achieve 60%+ GPU cost reduction without requiring model code refactoring?',
-    answer: 'Dovell operates beneath frameworks like PyTorch, vLLM, and Triton at the Linux eBPF and CUDA driver level. By intercepting memory allocations, it partitions physical H100 and A100 silicon into micro-vGPUs, bin-packing concurrent tasks into otherwise idle VRAM with zero code modifications.',
-    stats: ['1.25 GB Granularity', '< 0.08ms Overhead', '68% Cost Cut'],
-    specId: 'SPEC-01'
+    numStr: '01',
+    category: 'OVERVIEW & CAPABILITIES',
+    shortCategory: 'Core Purpose',
+    question: 'What does Dovell help teams do?',
+    answer: 'Dovell brings audio recordings, transcripts, conversation details, analysis records, and review activity into one workspace. Teams can search interactions, document findings, and track outcomes.',
+    stats: ['Centralized Audio', 'Searchable Transcripts', 'Traceable Outcomes'],
+    specId: 'FAQ-01'
   },
   {
     id: 2,
-    category: 'INFERENCE ACCELERATION',
-    shortCategory: 'Inference Speed',
-    question: 'What is the latency overhead on LLM Time-to-First-Token (TTFT) and throughput?',
-    answer: 'The eBPF driver probe adds less than 0.08 milliseconds of overhead per forward pass, which is completely imperceptible. In fact, for multi-turn chat and agentic workflows, Dovell’s cross-node tiered KV-cache sharing speeds up TTFT by an average of 65% by eliminating redundant prompt prefill computation.',
-    stats: ['-65% TTFT Latency', '3.8x Throughput', '99.4% Cache Hit'],
-    specId: 'SPEC-02'
+    numStr: '02',
+    category: 'TRANSCRIPTION & PROCESSING',
+    shortCategory: 'Automated Transcription',
+    question: 'Does Dovell automatically transcribe recordings?',
+    answer: 'Automated transcription depends on the processing service configured for your workspace. Existing transcripts can also be stored and reviewed alongside conversation records.',
+    stats: ['Configured Engines', 'Import Existing Transcripts', 'Multi-Format'],
+    specId: 'FAQ-02'
   },
   {
     id: 3,
-    category: 'FAULT TOLERANCE',
-    shortCategory: 'Fault Tolerance',
-    question: 'How does spot instance preemption protection work without dropping jobs?',
-    answer: 'Dovell maintains heartbeat telemetry with cloud provider preemption endpoints (AWS Spot, GCP Preemptible, Azure Spot). When a reclaim notice is detected, Dovell streams tensor checkpoints to standby instances in ~380ms with zero data loss.',
-    stats: ['0 Job Preemptions', '74% Spot Discount', '< 380ms Failover'],
-    specId: 'SPEC-03'
+    numStr: '03',
+    category: 'TRANSCRIPT REVIEW & QA',
+    shortCategory: 'Corrections & QA',
+    question: 'Can reviewers correct transcripts?',
+    answer: 'Yes. Transcript review and correction are core parts of the workflow. Review status helps teams distinguish generated content from human-verified transcripts.',
+    stats: ['Human Verification', 'Inline Corrections', 'Audit History'],
+    specId: 'FAQ-03'
   },
   {
     id: 4,
-    category: 'SECURITY & PRIVACY',
-    shortCategory: 'Security & Privacy',
-    question: 'Are our proprietary weights, prompts, and customer data protected?',
-    answer: 'Yes. Dovell only manipulates hardware memory allocation tables, thread scheduling queues, and driver telemetry. Model weights, embeddings, prompts, and customer inference outputs never leave your secure VPC, Kubernetes cluster, or on-premises environment. We are SOC2 Type II, HIPAA, and ISO 27001 compliant.',
-    stats: ['100% In-VPC Execution', 'SOC 2 Type II', '0 Bytes Data Retention'],
-    specId: 'SPEC-04'
+    numStr: '04',
+    category: 'CONVERSATION ANALYTICS',
+    shortCategory: 'Analytics Scope',
+    question: 'What conversation analysis does Dovell support?',
+    answer: 'The scope includes configurable topic, keyword, and sentiment analysis records. Automated analysis depends on the configured services, supported languages, and available recording quality.',
+    stats: ['Topic Detection', 'Keyword Tracking', 'Sentiment Indicators'],
+    specId: 'FAQ-04'
   },
   {
     id: 5,
-    category: 'AIR-GAPPED INFRASTRUCTURE',
-    shortCategory: 'Air-Gapped Slurm',
-    question: 'Can Dovell be deployed in air-gapped on-premise clusters or Slurm environments?',
-    answer: 'Absolutely. We provide standalone Debian/RPM packages and an uncoupled Slurm daemon designed specifically for sovereign AI laboratories, national labs, and financial institutions requiring 100% offline air-gapped operation with local telemetry storage.',
-    stats: ['Native Slurm Daemon', '100% Offline Air-Gapped', 'Cgroups Isolation'],
-    specId: 'SPEC-05'
+    numStr: '05',
+    category: 'SEARCH & ORGANIZATION',
+    shortCategory: 'Search & Tags',
+    question: 'Can we search and categorize conversations?',
+    answer: 'Yes. Teams can organize records using conversation details, categories, tags, review statuses, and outcomes, then use search and filters to find relevant interactions.',
+    stats: ['Metadata Filtering', 'Custom Category Tags', 'Outcome Tracking'],
+    specId: 'FAQ-05'
   },
   {
     id: 6,
-    category: 'FINOPS ROI',
-    shortCategory: 'FinOps & ROI',
-    question: 'What is the deployment timeline and how is the 3x ROI Guarantee mathematically verified?',
-    answer: 'Deployment takes under 90 seconds via Helm or Docker. You can run Dovell in "Shadow Audit Mode" for 48 hours to benchmark exact baseline waste. If you do not achieve at least 3x your subscription cost in documented savings within 30 days, your fee is 100% refunded.',
-    stats: ['3x Guaranteed ROI', '48h Shadow Audit', '< 90s Helm Install'],
-    specId: 'SPEC-06'
+    numStr: '06',
+    category: 'SECURITY & GOVERNANCE',
+    shortCategory: 'Access Control',
+    question: 'How is team access managed?',
+    answer: 'User access controls determine who can view and work with conversation records. The permission structure should be configured around your organization’s roles and review responsibilities.',
+    stats: ['Role-Based Access', 'Departmental Scopes', 'Review Ownership'],
+    specId: 'FAQ-06'
   }
 ];
 
@@ -88,20 +96,19 @@ export default function Faq() {
           </div>
 
           <h2 className="faq-main-title">
-            EVERYTHING YOU NEED TO KNOW ABOUT AUTONOMOUS GPU OPTIMIZATION
+            Get to know Dovell
           </h2>
 
-          {/* Website Signature Dual Accent Lines */}
           <div className="accent-lines center">
             <div className="accent-line-coral"></div>
             <div className="accent-line-blue"></div>
           </div>
 
           <p className="faq-main-subtitle">
-            Direct architecture answers from our kernel engineering team regarding CUDA hooks, latency budgets, security postures, and financial ROI.
+            Answers about conversation records, transcription, analysis, and team reviews.
           </p>
 
-          {/* Sleek Segmented Topic Filter Pills */}
+          {/* Segmented Topic Filter Pills */}
           <div className="topic-track-wrapper">
             <div className="topic-track-pill">
               {FAQ_ITEMS.map((item, idx) => (
@@ -111,7 +118,7 @@ export default function Faq() {
                   className={`topic-tab-btn ${activeIdx === idx ? 'active' : ''}`}
                   aria-selected={activeIdx === idx}
                 >
-                  <span className="tab-num">0{idx + 1}</span>
+                  <span className="tab-num">{item.numStr}</span>
                   <span className="tab-label">{item.shortCategory}</span>
                 </button>
               ))}
@@ -153,11 +160,10 @@ export default function Faq() {
           </div>
 
           <div className="bubbles-dialogue-column">
-            {/* 1. Top Speech Bubble: QUESTION (White bubble with top-right Coral badge & bottom-left tail) */}
+            {/* 1. Top Speech Bubble: QUESTION */}
             <div className="speech-bubble-wrapper question-wrapper">
-              {/* Floating Top-Right Coral Badge */}
               <div className="speech-badge question-badge">
-                QUESTION
+                QUESTION {current.numStr}
               </div>
 
               <div className="speech-bubble-body question-bubble">
@@ -166,7 +172,6 @@ export default function Faq() {
                 </h3>
               </div>
 
-              {/* Bottom-Left Speech Tail */}
               <div className="speech-tail tail-bottom-left">
                 <svg viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M 36 0 C 24 6 12 18 0 28 C 10 18 20 8 36 8 Z" fill="#FFFFFF" />
@@ -174,9 +179,8 @@ export default function Faq() {
               </div>
             </div>
 
-            {/* 2. Bottom Speech Bubble: ANSWER (Soft Ice-Blue bubble with top-left Cyan badge & bottom-right tail) */}
+            {/* 2. Bottom Speech Bubble: ANSWER */}
             <div className="speech-bubble-wrapper answer-wrapper">
-              {/* Floating Top-Left Cyan Badge */}
               <div className="speech-badge answer-badge">
                 ANSWER
               </div>
@@ -197,7 +201,6 @@ export default function Faq() {
                 </div>
               </div>
 
-              {/* Bottom-Right Speech Tail */}
               <div className="speech-tail tail-bottom-right">
                 <svg viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M 0 0 C 12 6 24 18 36 28 C 26 18 16 8 0 8 Z" fill="#E0F2FE" />
@@ -210,10 +213,10 @@ export default function Faq() {
           <div className="dialogue-footer-cta">
             <div className="footer-cta-left">
               <Sparkles size={18} className="text-coral" />
-              <span>Have a unique multi-cloud or Slurm cluster topology?</span>
+              <span>Have a specific conversation workflow in mind?</span>
             </div>
             <a href="#contact" className="btn-coral-pill footer-action-btn">
-              <span>Book 1-on-1 Architecture Call</span>
+              <span>Talk to Our Team</span>
               <ArrowRight size={15} />
             </a>
           </div>
@@ -251,12 +254,12 @@ export default function Faq() {
         }
 
         .faq-main-subtitle {
-          font-size: 1.02rem;
+          font-size: 1.05rem;
           color: #94A3B8;
           line-height: 1.6;
           margin-top: 18px;
           margin-bottom: 28px;
-          max-width: 740px;
+          max-width: 680px;
           margin-left: auto;
           margin-right: auto;
         }
@@ -331,7 +334,7 @@ export default function Faq() {
           margin: 0 auto;
         }
 
-        /* Refined Navigation & Status Bar */
+        /* Navigation & Status Bar */
         .stage-controls-bar {
           display: flex;
           align-items: center;
@@ -400,7 +403,6 @@ export default function Faq() {
           width: 100%;
         }
 
-        /* Floating Badges */
         .speech-badge {
           position: absolute;
           z-index: 5;
@@ -437,7 +439,7 @@ export default function Faq() {
           transition: transform 0.3s ease;
         }
 
-        /* Question Bubble (White) */
+        /* Question Bubble */
         .question-bubble {
           background: #FFFFFF;
           color: var(--color-navy-primary);
@@ -454,7 +456,7 @@ export default function Faq() {
           letter-spacing: -0.01em;
         }
 
-        /* Answer Bubble (Soft Ice-Blue Tint) */
+        /* Answer Bubble */
         .answer-bubble {
           background: #E0F2FE;
           color: var(--color-navy-primary);

@@ -2,16 +2,13 @@
 
 import React, { useState } from 'react';
 import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  ShieldCheck, 
-  ArrowRight, 
   CheckCircle2, 
   Send,
-  Lock,
-  Sparkles,
-  Server
+  ShieldCheck,
+  Headphones,
+  FileCheck,
+  Settings,
+  Sparkles
 } from 'lucide-react';
 
 export default function ContactSection() {
@@ -19,16 +16,17 @@ export default function ContactSection() {
     fullName: '',
     workEmail: '',
     company: '',
-    fleetSize: '16-64',
-    workloadType: 'inference',
-    message: ''
+    department: '',
+    volume: '500-2000',
+    interest: 'Audio & Conversation Management',
+    workflowNotes: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.workEmail || !formData.fullName) return;
+    if (!formData.workEmail || !formData.fullName || !formData.company) return;
     setSubmitted(true);
   };
 
@@ -38,75 +36,53 @@ export default function ContactSection() {
         <div className="contact-grid">
           {/* Left Info Column */}
           <div className="contact-left-info">
-            <span className="bracket-tag">TECHNICAL ADVISORY</span>
-            <h2 className="section-title">DEPLOY DOVELL ON YOUR CLUSTER</h2>
+            <span className="bracket-tag">LET’S TALK ABOUT YOUR WORKFLOW</span>
+            <h2 className="section-title">Bring clarity to your conversation records</h2>
             <p className="section-subtitle">
-              Schedule a 1-on-1 architecture review with our systems engineers. We will analyze your active GPU telemetry, establish baseline idle memory, and execute an air-tight 14-day POC.
+              Tell us how your team stores recordings, reviews transcripts, and tracks outcomes. We’ll discuss how Dovell can support your process.
             </p>
 
             <div className="contact-guarantees-list">
               <div className="guarantee-bullet">
                 <div className="bullet-icon">
-                  <CheckCircle2 size={16} />
+                  <Headphones size={20} />
                 </div>
                 <div>
-                  <h4 className="bullet-title">Rapid 90-Second Deployment</h4>
-                  <p className="bullet-desc">No code refactoring or container downtime required.</p>
+                  <h4 className="bullet-title">A focused platform walkthrough</h4>
+                  <p className="bullet-desc">Explore conversation management, transcript review, and reporting.</p>
                 </div>
               </div>
 
               <div className="guarantee-bullet">
                 <div className="bullet-icon">
-                  <CheckCircle2 size={16} />
+                  <FileCheck size={20} />
                 </div>
                 <div>
-                  <h4 className="bullet-title">Mutual Enterprise NDA</h4>
-                  <p className="bullet-desc">Strict confidentiality guaranteed before inspecting cluster specs.</p>
+                  <h4 className="bullet-title">A discussion of your requirements</h4>
+                  <p className="bullet-desc">Identify the roles, review stages, and analysis your team needs.</p>
                 </div>
               </div>
 
               <div className="guarantee-bullet">
                 <div className="bullet-icon">
-                  <CheckCircle2 size={16} />
+                  <Settings size={20} />
                 </div>
                 <div>
-                  <h4 className="bullet-title">Dedicated Systems Architect</h4>
-                  <p className="bullet-desc">Direct private Slack channel with our core eBPF engineering team.</p>
+                  <h4 className="bullet-title">A practical implementation conversation</h4>
+                  <p className="bullet-desc">Discuss processing services, storage, and potential integrations.</p>
                 </div>
               </div>
             </div>
 
-            {/* Direct Contact Cards */}
-            <div className="direct-channels-grid">
-              <div className="channel-box">
-                <Mail size={18} className="text-coral" />
-                <div className="channel-info">
-                  <span className="ch-label">Enterprise Inquiries</span>
-                  <a href="mailto:architects@dovell.ai" className="ch-val">architects@dovell.ai</a>
-                </div>
-              </div>
-
-              <div className="channel-box">
-                <Phone size={18} className="text-cyan" />
-                <div className="channel-info">
-                  <span className="ch-label">Engineering Hotline</span>
-                  <span className="ch-val">+1 (415) 890-GPU1</span>
-                </div>
-              </div>
-            </div>
-
+            {/* Compliance Badge Row */}
             <div className="compliance-row">
               <div className="compliance-badge">
                 <ShieldCheck size={14} className="text-emerald" />
-                <span>SOC 2 Type II Certified</span>
+                <span>Enterprise Privacy Architecture</span>
               </div>
               <div className="compliance-badge">
-                <Lock size={14} className="text-emerald" />
-                <span>Zero Data Retention</span>
-              </div>
-              <div className="compliance-badge">
-                <Server size={14} className="text-emerald" />
-                <span>ISO 27001</span>
+                <ShieldCheck size={14} className="text-emerald" />
+                <span>Configurable Access Controls</span>
               </div>
             </div>
           </div>
@@ -118,9 +94,9 @@ export default function ContactSection() {
                 <div className="success-icon-wrapper">
                   <CheckCircle2 size={44} className="text-emerald" />
                 </div>
-                <h3 className="success-title">Pilot Request Confirmed!</h3>
+                <h3 className="success-title">Request Received</h3>
                 <p className="success-message">
-                  Thank you, <strong>{formData.fullName}</strong>. A Principal Systems Architect from Dovell has received your request for <strong>{formData.company}</strong> ({formData.fleetSize} GPUs). We will reach out to <strong>{formData.workEmail}</strong> within 2 business hours with your license token and schedule your telemetry review.
+                  Thank you for your interest in Dovell. Your demo request has been received. Our team will review your conversation workflow requirements and reach out to <strong>{formData.workEmail}</strong> shortly.
                 </p>
                 <button 
                   onClick={() => setSubmitted(false)}
@@ -132,8 +108,8 @@ export default function ContactSection() {
             ) : (
               <form onSubmit={handleSubmit} className="contact-form">
                 <div className="form-header">
-                  <h3 className="form-card-title">Schedule Cluster POC & Audit</h3>
-                  <p className="form-card-subtitle">Receive an automated waste audit report and 14-day production trial key.</p>
+                  <h3 className="form-card-title">Request a Dovell Demo</h3>
+                  <p className="form-card-subtitle">Share a few details so we can tailor the conversation to your team.</p>
                 </div>
 
                 <div className="form-fields-grid">
@@ -143,7 +119,7 @@ export default function ContactSection() {
                       id="fullName"
                       type="text" 
                       required
-                      placeholder="e.g. Dr. Maya Lin"
+                      placeholder="e.g. Maya Lin"
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       className="form-input"
@@ -156,7 +132,7 @@ export default function ContactSection() {
                       id="workEmail"
                       type="email" 
                       required
-                      placeholder="e.g. maya@company.ai"
+                      placeholder="e.g. maya@company.com"
                       value={formData.workEmail}
                       onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
                       className="form-input"
@@ -169,7 +145,7 @@ export default function ContactSection() {
                       id="company"
                       type="text" 
                       required
-                      placeholder="e.g. Neural Scale Corp"
+                      placeholder="e.g. Acme Corporation"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       className="form-input"
@@ -177,55 +153,70 @@ export default function ContactSection() {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label" htmlFor="fleetSize">Current GPU Fleet Size</label>
+                    <label className="form-label" htmlFor="department">Team / Department</label>
+                    <input 
+                      id="department"
+                      type="text" 
+                      placeholder="e.g. Customer Support, QA, Operations"
+                      value={formData.department}
+                      onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                      className="form-input"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="volume">Estimated Monthly Conversation Volume</label>
                     <select 
-                      id="fleetSize"
-                      value={formData.fleetSize}
-                      onChange={(e) => setFormData({ ...formData, fleetSize: e.target.value })}
+                      id="volume"
+                      value={formData.volume}
+                      onChange={(e) => setFormData({ ...formData, volume: e.target.value })}
                       className="form-input form-select"
                     >
-                      <option value="1-16">1 to 16 GPUs (Testing)</option>
-                      <option value="16-64">16 to 64 GPUs (Scaling)</option>
-                      <option value="64-256">64 to 256 GPUs (Production)</option>
-                      <option value="256+">256+ GPUs (Enterprise Supercluster)</option>
+                      <option value="fewer-than-500">Fewer than 500</option>
+                      <option value="500-2000">500–2,000</option>
+                      <option value="2001-10000">2,001–10,000</option>
+                      <option value="more-than-10000">More than 10,000</option>
+                      <option value="not-sure">Not Sure Yet</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="interest">Primary Area of Interest</label>
+                    <select 
+                      id="interest"
+                      value={formData.interest}
+                      onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
+                      className="form-input form-select"
+                    >
+                      <option value="Audio & Conversation Management">Audio & Conversation Management</option>
+                      <option value="Transcript Review & Verification">Transcript Review & Verification</option>
+                      <option value="Conversation Analytics">Conversation Analytics</option>
+                      <option value="Quality Assurance Workflows">Quality Assurance Workflows</option>
+                      <option value="Reporting & Outcome Tracking">Reporting & Outcome Tracking</option>
+                      <option value="Enterprise Implementation">Enterprise Implementation</option>
                     </select>
                   </div>
 
                   <div className="form-group full-width">
-                    <label className="form-label" htmlFor="workloadType">Primary AI Workload Focus</label>
-                    <select 
-                      id="workloadType"
-                      value={formData.workloadType}
-                      onChange={(e) => setFormData({ ...formData, workloadType: e.target.value })}
-                      className="form-input form-select"
-                    >
-                      <option value="inference">High-Throughput LLM / Agent Inference (vLLM, TensorRT)</option>
-                      <option value="training">Distributed Deep Learning & Multi-Node Training (Slurm/PyTorch)</option>
-                      <option value="finetuning">Domain Model Fine-Tuning & LoRA Checkpointing</option>
-                      <option value="spot">Multi-Cloud Spot Instance Cost Arbitrage</option>
-                    </select>
-                  </div>
-
-                  <div className="form-group full-width">
-                    <label className="form-label" htmlFor="message">Cluster Infrastructure Details (Optional)</label>
+                    <label className="form-label" htmlFor="workflowNotes">Tell Us About Your Workflow — optional</label>
                     <textarea 
-                      id="message"
+                      id="workflowNotes"
                       rows={3}
-                      placeholder="Tell us about your hardware accelerators (e.g. H100 SXM5, A100), cloud environment (AWS EKS, CoreWeave), or specific latency targets..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Describe how you manage recordings today and what you would like to improve."
+                      value={formData.workflowNotes}
+                      onChange={(e) => setFormData({ ...formData, workflowNotes: e.target.value })}
                       className="form-input form-textarea"
                     ></textarea>
                   </div>
                 </div>
 
                 <button type="submit" className="btn-coral-pill form-submit-btn">
-                  <span>REQUEST CLUSTER POC & AUDIT</span>
-                  <Send size={16} />
+                  <span>Request a Demo</span>
+                  <Send size={15} />
                 </button>
 
                 <p className="form-privacy-note">
-                  🔒 We protect your data. Strictly zero telemetry egress without permission.
+                  Please do not include recordings, transcripts, or sensitive customer information in this form.
                 </p>
               </form>
             )}
@@ -240,8 +231,8 @@ export default function ContactSection() {
 
         .contact-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 60px;
+          grid-template-columns: 1.05fr 1fr;
+          gap: 56px;
           align-items: flex-start;
         }
 
@@ -253,7 +244,7 @@ export default function ContactSection() {
         .contact-guarantees-list {
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 22px;
           margin-top: 32px;
           margin-bottom: 36px;
         }
@@ -261,89 +252,54 @@ export default function ContactSection() {
         .guarantee-bullet {
           display: flex;
           align-items: flex-start;
-          gap: 14px;
+          gap: 16px;
         }
 
         .bullet-icon {
-          color: #10B981;
-          margin-top: 2px;
+          color: var(--color-coral);
+          background: rgba(232, 90, 42, 0.1);
+          padding: 10px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           flex-shrink: 0;
         }
 
         .bullet-title {
-          font-size: 1rem;
+          font-size: 1.05rem;
           font-weight: 800;
           color: var(--color-navy-primary);
-          line-height: 1.2;
+          line-height: 1.25;
         }
 
         .bullet-desc {
           font-size: 0.88rem;
           color: #64748B;
-          margin-top: 3px;
-        }
-
-        .direct-channels-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          margin-bottom: 28px;
-        }
-
-        .channel-box {
-          background: var(--color-white);
-          border: 1px solid #E2E8F0;
-          border-radius: var(--radius-md);
-          padding: 16px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .text-coral {
-          color: var(--color-coral);
-        }
-
-        .text-cyan {
-          color: var(--color-cyan);
+          margin-top: 4px;
+          line-height: 1.45;
         }
 
         .text-emerald {
           color: #10B981;
         }
 
-        .channel-info {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .ch-label {
-          font-size: 0.72rem;
-          color: #64748B;
-          font-family: var(--font-mono);
-        }
-
-        .ch-val {
-          font-size: 0.88rem;
-          font-weight: 700;
-          color: var(--color-navy-primary);
-        }
-
         .compliance-row {
           display: flex;
           flex-wrap: wrap;
           gap: 12px;
+          margin-top: 6px;
         }
 
         .compliance-badge {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          font-size: 0.75rem;
+          gap: 8px;
+          font-size: 0.78rem;
           font-weight: 600;
           color: #334155;
           background: #EEF2F6;
-          padding: 6px 12px;
+          padding: 7px 14px;
           border-radius: var(--radius-full);
           border: 1px solid #E2E8F0;
         }
@@ -362,7 +318,7 @@ export default function ContactSection() {
         }
 
         .form-card-title {
-          font-size: 1.4rem;
+          font-size: 1.45rem;
           font-weight: 800;
           color: var(--color-navy-primary);
           line-height: 1.2;
@@ -427,15 +383,16 @@ export default function ContactSection() {
 
         .form-submit-btn {
           width: 100%;
-          padding: 14px;
+          padding: 13px;
           font-size: 0.95rem;
         }
 
         .form-privacy-note {
-          font-size: 0.75rem;
+          font-size: 0.74rem;
           color: #94A3B8;
           text-align: center;
           margin-top: 14px;
+          line-height: 1.4;
         }
 
         /* Success State */
@@ -486,9 +443,6 @@ export default function ContactSection() {
           }
           .form-group.full-width {
             grid-column: span 1;
-          }
-          .direct-channels-grid {
-            grid-template-columns: 1fr;
           }
         }
       `}</style>
