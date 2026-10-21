@@ -20,7 +20,7 @@ export default function Hero() {
             <span>ENTERPRISE KNOWLEDGE GRAPH &amp; GPU OPTIMIZATION</span>
           </div>
 
-          {/* 4-Line Punchy Headline (Forced 4 neat lines matching reference) */}
+          {/* 4-Line Punchy Headline */}
           <h1 className="hero-headline">
             <span className="hl-row">Connect enterprise silos,</span>
             <span className="hl-row">map dependencies,</span>
@@ -63,84 +63,84 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Column: Giant Circular Photo Bowl (EXTRA LARGE SCALE - Fills Hero) */}
+        {/* Right Column: Giant Semicircular Photo Bowl (MASSIVE SCALE - Fills Hero Section Height) */}
         <div className="hero-visual-col">
           <div className="giant-semicircle-wrapper">
             
             <svg 
               className="hero-semicircle-svg" 
-              viewBox="0 0 1000 540" 
+              viewBox="0 0 1200 620" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                {/* 1. Large Semicircular ClipPath: Center (500, 0), Radius = 470 */}
-                <clipPath id="bigHeroPhotoClip">
-                  <path d="M 30,0 A 470,470 0 0,0 970,0 Z" />
+                {/* 1. Semicircular ClipPath: Center (600, 0), Radius = 560 */}
+                <clipPath id="massiveHeroBowlClip">
+                  <path d="M 40,0 A 560,560 0 0,0 1160,0 Z" />
                 </clipPath>
 
                 {/* 2. Soft Photo Vignette Overlay */}
-                <radialGradient id="bigPhotoVignette" cx="50%" cy="20%" r="80%">
+                <radialGradient id="massivePhotoVignette" cx="50%" cy="20%" r="80%">
                   <stop offset="35%" stopColor="rgba(10, 34, 64, 0)" />
                   <stop offset="100%" stopColor="rgba(10, 34, 64, 0.45)" />
                 </radialGradient>
 
-                {/* 3. Drop Shadow Filter for Orbit Arcs */}
-                <filter id="bigArcShadow" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="5" stdDeviation="8" floodColor="rgba(10, 34, 64, 0.28)" />
+                {/* 3. Drop Shadow for Orbit Arcs */}
+                <filter id="massiveArcShadow" x="-10%" y="-10%" width="120%" height="120%">
+                  <feDropShadow dx="0" dy="6" stdDeviation="10" floodColor="rgba(10, 34, 64, 0.3)" />
                 </filter>
               </defs>
 
               {/* === THE GIANT SEMICIRCULAR PHOTO BOWL (Full-Bleed Real Photograph) === */}
-              <g clipPath="url(#bigHeroPhotoClip)">
+              <g clipPath="url(#massiveHeroBowlClip)">
                 {/* Dark Navy Base */}
-                <rect x="30" y="0" width="940" height="540" fill="#0A2240" />
+                <rect x="40" y="0" width="1120" height="620" fill="#0A2240" />
 
                 {/* Full-bleed Real High-Resolution Photograph */}
                 <image 
                   href="/images/hero-cluster.jpg" 
-                  x="30" 
+                  x="40" 
                   y="0" 
-                  width="940" 
-                  height="490" 
+                  width="1120" 
+                  height="580" 
                   preserveAspectRatio="xMidYMid slice" 
-                  className="fullbleed-big-photo"
+                  className="fullbleed-massive-photo"
                 />
 
                 {/* Subtle Cinematic Vignette for Depth */}
-                <rect x="30" y="0" width="940" height="540" fill="url(#bigPhotoVignette)" />
+                <rect x="40" y="0" width="1120" height="620" fill="url(#massivePhotoVignette)" />
 
                 {/* Subtle Top-Edge Border Overlay */}
-                <line x1="30" y1="1" x2="970" y2="1" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="2" />
+                <line x1="40" y1="1" x2="1160" y2="1" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="2" />
               </g>
 
-              {/* === THE SIGNATURE CONCENTRIC ORBIT STROKES (Center 500, 0) === */}
+              {/* === THE SIGNATURE CONCENTRIC ORBIT STROKES (Center 600, 0) === */}
 
               {/* 1. Left Arc: Electric Cyan stroke framing the left edge of the circular bowl */}
-              {/* Radius = 486 (16px offset), Theta 162° to 112° */}
+              {/* Radius = 578 (18px offset), Theta 162° to 112° */}
               <path 
-                d="M 38,150 A 486,486 0 0,0 318,451" 
+                d="M 50,179 A 578,578 0 0,0 384,536" 
                 stroke="#38BDF8" 
-                strokeWidth="8.5" 
+                strokeWidth="9.5" 
                 strokeLinecap="round" 
-                filter="url(#bigArcShadow)"
+                filter="url(#massiveArcShadow)"
               />
 
               {/* 2. Bottom-Right Arc: Dark Navy stroke hugging the lower-right curve */}
-              {/* Radius = 480 (10px offset), Theta 96° to 34° */}
+              {/* Radius = 572 (12px offset), Theta 96° to 34° */}
               <path 
-                d="M 450,477 A 480,480 0 0,0 898,268" 
+                d="M 540,569 A 572,572 0 0,0 1074,320" 
                 stroke="#0A2240" 
-                strokeWidth="9.5" 
+                strokeWidth="11" 
                 strokeLinecap="round" 
               />
 
               {/* 3. Bottom Outer Arc: Soft Sky Blue stroke sweeping underneath the bottom curve */}
-              {/* Radius = 500 (30px offset), Theta 125° to 65° */}
+              {/* Radius = 596 (36px offset), Theta 125° to 65° */}
               <path 
-                d="M 213,410 A 500,500 0 0,0 711,453" 
+                d="M 258,488 A 596,596 0 0,0 852,540" 
                 stroke="#BAE6FD" 
-                strokeWidth="7.5" 
+                strokeWidth="8.5" 
                 strokeLinecap="round" 
               />
             </svg>
@@ -165,7 +165,7 @@ export default function Hero() {
           background-color: #FFFFFF;
           position: relative;
           width: 100%;
-          min-height: 600px;
+          min-height: 640px;
           overflow: hidden;
           border-bottom: 1px solid #E2E8F0;
           padding-top: 0;
@@ -173,21 +173,22 @@ export default function Hero() {
 
         .hero-container {
           display: grid;
-          grid-template-columns: 0.92fr 1.28fr;
-          align-items: flex-start;
+          grid-template-columns: minmax(460px, 520px) 1fr;
+          align-items: center;
           gap: 20px;
           position: relative;
-          max-width: 1520px;
+          max-width: 1680px;
           margin: 0 auto;
-          padding: 0 24px 0 40px;
+          padding: 0 0 0 40px;
+          min-height: 640px;
         }
 
         /* Left Content Column */
         .hero-content-col {
           display: flex;
           flex-direction: column;
-          padding-top: 48px;
-          padding-bottom: 64px;
+          padding-top: 40px;
+          padding-bottom: 50px;
           z-index: 2;
         }
 
@@ -204,7 +205,7 @@ export default function Hero() {
           font-weight: 700;
           color: #0A1C36;
           letter-spacing: 0.05em;
-          margin-bottom: 24px;
+          margin-bottom: 22px;
           width: fit-content;
         }
 
@@ -216,7 +217,7 @@ export default function Hero() {
           box-shadow: 0 0 8px rgba(232, 90, 42, 0.6);
         }
 
-        /* 4-Line Headline - forced single rows, no awkward orphan wrapping */
+        /* 4-Line Headline */
         .hero-headline {
           display: flex;
           flex-direction: column;
@@ -225,7 +226,7 @@ export default function Hero() {
           line-height: 1.1;
           color: #0A1C36;
           letter-spacing: -0.035em;
-          margin: 0 0 24px 0;
+          margin: 0 0 22px 0;
           font-family: var(--font-primary), 'Plus Jakarta Sans', sans-serif;
         }
 
@@ -247,8 +248,8 @@ export default function Hero() {
           line-height: 1.62;
           color: #334155;
           font-weight: 500;
-          max-width: 510px;
-          margin: 0 0 34px 0;
+          max-width: 500px;
+          margin: 0 0 32px 0;
         }
 
         /* Dual Pill Buttons Row */
@@ -256,7 +257,7 @@ export default function Hero() {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin-bottom: 34px;
+          margin-bottom: 32px;
           flex-wrap: wrap;
         }
 
@@ -326,12 +327,13 @@ export default function Hero() {
           color: #E85A2A;
         }
 
-        /* Right Column: Giant Semicircle Visual (Substantially Larger) */
+        /* Right Column: Giant Semicircle Visual (MASSIVE Full-Height Presence) */
         .hero-visual-col {
           display: flex;
           justify-content: flex-end;
           align-items: flex-start;
           width: 100%;
+          height: 100%;
           position: relative;
           padding-top: 0;
           overflow: visible;
@@ -340,18 +342,19 @@ export default function Hero() {
         .giant-semicircle-wrapper {
           position: relative;
           width: 100%;
-          max-width: 960px;
+          max-width: 1140px;
           display: flex;
-          justify-content: center;
+          justify-content: flex-end;
           align-items: flex-start;
         }
 
         .hero-semicircle-svg {
           width: 100%;
           height: auto;
+          max-height: 620px;
           display: block;
           overflow: visible;
-          filter: drop-shadow(0 25px 60px rgba(10, 34, 64, 0.25));
+          filter: drop-shadow(0 25px 65px rgba(10, 34, 64, 0.28));
           transition: transform 0.4s ease;
         }
 
@@ -362,21 +365,21 @@ export default function Hero() {
         /* Neat Status Pill at Bottom of Semicircle */
         .semicircle-status-pill {
           position: absolute;
-          bottom: 26px;
+          bottom: 28px;
           left: 50%;
           transform: translateX(-50%);
           background: rgba(10, 34, 64, 0.94);
           border: 1px solid rgba(255, 255, 255, 0.22);
           backdrop-filter: blur(14px);
           color: #FFFFFF;
-          padding: 9px 24px;
+          padding: 10px 26px;
           border-radius: var(--radius-full);
-          font-size: 0.82rem;
+          font-size: 0.84rem;
           font-weight: 600;
           display: flex;
           align-items: center;
           gap: 10px;
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
           white-space: nowrap;
           z-index: 5;
           pointer-events: none;
@@ -407,13 +410,13 @@ export default function Hero() {
         }
 
         /* Responsive Breakpoints */
-        @media (max-width: 1280px) {
+        @media (max-width: 1360px) {
           .hero-container {
-            grid-template-columns: 1fr 1.15fr;
-            padding: 0 20px 0 32px;
+            grid-template-columns: 480px 1fr;
+            padding: 0 0 0 32px;
           }
           .giant-semicircle-wrapper {
-            max-width: 800px;
+            max-width: 960px;
           }
         }
 
@@ -422,6 +425,7 @@ export default function Hero() {
             grid-template-columns: 1fr;
             gap: 40px;
             padding: 0 24px;
+            min-height: auto;
           }
           .hero-content-col {
             padding-top: 36px;
@@ -453,9 +457,9 @@ export default function Hero() {
             justify-content: center;
           }
           .semicircle-status-pill {
-            bottom: 12px;
-            padding: 6px 14px;
-            font-size: 0.7rem;
+            bottom: 14px;
+            padding: 7px 16px;
+            font-size: 0.72rem;
           }
         }
       `}</style>
