@@ -290,9 +290,10 @@ export default function Hero() {
         /* Wide Full-Width Waveform at Bottom */
         .hero-waveform-fullwidth {
           width: 100%;
+          height: 240px;
           position: relative;
           z-index: 1;
-          margin-top: 10px;
+          margin-top: 14px;
           overflow: hidden;
           line-height: 0;
         }
@@ -335,6 +336,10 @@ export default function Hero() {
           .hero-trust-row {
             white-space: normal;
           }
+          .hero-waveform-fullwidth {
+            height: 185px;
+            margin-top: 10px;
+          }
         }
 
         @media (max-width: 640px) {
@@ -352,6 +357,10 @@ export default function Hero() {
             width: 100%;
             text-align: center;
             justify-content: center;
+          }
+          .hero-waveform-fullwidth {
+            height: 140px;
+            margin-top: 6px;
           }
         }
       `}</style>

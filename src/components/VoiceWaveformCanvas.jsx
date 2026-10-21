@@ -222,12 +222,12 @@ export default function VoiceWaveformCanvas() {
         .voice-waveform-container {
           position: relative;
           width: 100%;
-          height: 230px;
+          height: 100%;
+          min-height: 240px;
           overflow: hidden;
           background: transparent;
           pointer-events: none;
           user-select: none;
-          margin-top: 14px;
         }
 
         .voice-waveform-canvas {
@@ -240,15 +240,13 @@ export default function VoiceWaveformCanvas() {
 
         @media (max-width: 1024px) {
           .voice-waveform-container {
-            height: 180px;
-            margin-top: 10px;
+            min-height: 185px;
           }
         }
 
         @media (max-width: 768px) {
           .voice-waveform-container {
-            height: 140px;
-            margin-top: 8px;
+            min-height: 140px;
           }
         }
       `}</style>
