@@ -9,6 +9,7 @@ import {
   Sliders, 
   FileCheck
 } from 'lucide-react';
+import WaveformSlider from './WaveformSlider';
 
 export default function RoiCalculator() {
   // Input fields (defaulting to the exact values in the user's screenshot: 2,500 / 8 min / 28% / 12 min)
@@ -101,92 +102,68 @@ export default function RoiCalculator() {
               </div>
 
               {/* Slider 1: Conversations per Month */}
-              <div className="slider-group">
-                <div className="slider-label-row">
-                  <span className="field-title">Conversations per Month</span>
-                  <span className="slider-value-pill">{conversationsPerMonth.toLocaleString()}</span>
-                </div>
-                <input 
-                  type="range"
-                  min="200"
-                  max="25000"
-                  step="100"
-                  value={conversationsPerMonth}
-                  onChange={(e) => setConversationsPerMonth(Number(e.target.value))}
-                  className="theme-slider"
-                />
-                <div className="slider-range-limits">
-                  <span>200</span>
-                  <span>10,000</span>
-                  <span>25,000+</span>
-                </div>
-              </div>
+              <WaveformSlider 
+                id="slider-conv-month"
+                label="Conversations per Month"
+                value={conversationsPerMonth}
+                valueDisplay={conversationsPerMonth.toLocaleString()}
+                min={200}
+                mid={10000}
+                max={25000}
+                step={100}
+                minLabel="200"
+                midLabel="10,000"
+                maxLabel="25,000+"
+                onChange={setConversationsPerMonth}
+              />
 
               {/* Slider 2: Average Recording Length — minutes */}
-              <div className="slider-group">
-                <div className="slider-label-row">
-                  <span className="field-title">Average Recording Length — minutes</span>
-                  <span className="slider-value-pill">{avgRecordingLength} min</span>
-                </div>
-                <input 
-                  type="range"
-                  min="1"
-                  max="60"
-                  step="1"
-                  value={avgRecordingLength}
-                  onChange={(e) => setAvgRecordingLength(Number(e.target.value))}
-                  className="theme-slider"
-                />
-                <div className="slider-range-limits">
-                  <span>1 min</span>
-                  <span>30 min</span>
-                  <span>60 min</span>
-                </div>
-              </div>
+              <WaveformSlider 
+                id="slider-rec-length"
+                label="Average Recording Length — minutes"
+                value={avgRecordingLength}
+                valueDisplay={`${avgRecordingLength} min`}
+                min={1}
+                mid={30}
+                max={60}
+                step={1}
+                minLabel="1 min"
+                midLabel="30 min"
+                maxLabel="60 min"
+                onChange={setAvgRecordingLength}
+              />
 
-              {/* Slider 3: Conversations Selected for Review — percentage */}
-              <div className="slider-group">
-                <div className="slider-label-row">
-                  <span className="field-title">Conversations Selected for Review</span>
-                  <span className="slider-value-pill">{reviewPercentage}%</span>
-                </div>
-                <input 
-                  type="range"
-                  min="1"
-                  max="100"
-                  step="1"
-                  value={reviewPercentage}
-                  onChange={(e) => setReviewPercentage(Number(e.target.value))}
-                  className="theme-slider"
-                />
-                <div className="slider-range-limits">
-                  <span>1% sample</span>
-                  <span>50% sample</span>
-                  <span>100% full review</span>
-                </div>
-              </div>
+              {/* Slider 3: Conversations Selected for Review */}
+              <WaveformSlider 
+                id="slider-review-pct"
+                label="Conversations Selected for Review"
+                value={reviewPercentage}
+                valueDisplay={`${reviewPercentage}%`}
+                min={1}
+                mid={50}
+                max={100}
+                step={1}
+                minLabel="1% sample"
+                midLabel="50% sample"
+                maxLabel="100% full review"
+                onChange={setReviewPercentage}
+              />
 
-              {/* Slider 4: Average Review Time per Selected Conversation — minutes */}
-              <div className="slider-group">
-                <div className="slider-label-row">
-                  <span className="field-title">Average Review Time per Selected Conversation</span>
-                  <span className="slider-value-pill">{reviewTimePerConv} min</span>
-                </div>
-                <input 
-                  type="range"
-                  min="2"
-                  max="45"
-                  step="1"
-                  value={reviewTimePerConv}
-                  onChange={(e) => setReviewTimePerConv(Number(e.target.value))}
-                  className="theme-slider"
-                />
-                <div className="slider-range-limits">
-                  <span>2 min</span>
-                  <span>20 min</span>
-                  <span>45 min</span>
-                </div>
-              </div>
+              {/* Slider 4: Average Review Time per Selected Conversation */}
+              <WaveformSlider 
+                id="slider-review-time"
+                label="Average Review Time per Selected Conversation"
+                value={reviewTimePerConv}
+                valueDisplay={`${reviewTimePerConv} min`}
+                min={2}
+                mid={20}
+                max={45}
+                step={1}
+                minLabel="2 min"
+                midLabel="20 min"
+                maxLabel="45 min"
+                onChange={setReviewTimePerConv}
+              />
             </div>
 
             {/* Right Pane: Estimated Monthly Review Workload (Dark Navy Card) */}
