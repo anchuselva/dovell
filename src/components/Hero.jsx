@@ -1,38 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { 
   ArrowRight, 
   CheckCircle2, 
-  Volume2, 
   Activity, 
-  Radio, 
-  Sparkles,
-  Play,
-  Pause
+  Sparkles
 } from 'lucide-react';
 
 export default function Hero() {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [signalLevel, setSignalLevel] = useState(74);
-
-  // Random fluctuation for audio signal indicators
-  useEffect(() => {
-    if (!isPlaying) return;
-    const interval = setInterval(() => {
-      setSignalLevel(Math.floor(65 + Math.random() * 25));
-    }, 1200);
-    return () => clearInterval(interval);
-  }, [isPlaying]);
-
-  // Frequency spectrum bar heights for voice signal visualization
-  const waveBars = [
-    18, 25, 42, 60, 38, 22, 50, 78, 92, 64, 45, 80, 100, 85, 55, 32,
-    48, 70, 88, 62, 35, 58, 82, 95, 75, 50, 30, 65, 88, 72, 44, 28,
-    36, 52, 76, 94, 68, 42, 60, 84, 98, 74, 46, 30, 54, 78, 90, 65,
-    38, 62, 85, 70, 48, 26, 44, 68, 86, 60, 34, 52, 76, 88, 55, 24
-  ];
-
   return (
     <section id="platform" className="semicircle-hero-section">
       <div className="container hero-container">
@@ -93,101 +69,75 @@ export default function Hero() {
             
             <svg 
               className="hero-semicircle-svg" 
-              viewBox="0 0 840 460" 
+              viewBox="0 0 840 430" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                {/* Semicircular ClipPath: Center (420, 0), Radius = 400 */}
+                {/* Semicircular ClipPath: Center (420, 0), Radius = 385 */}
                 <clipPath id="heroPhotoBowlClip">
-                  <path d="M 20,0 A 400,400 0 0,0 820,0 Z" />
+                  <path d="M 35,0 A 385,385 0 0,0 805,0 Z" />
                 </clipPath>
 
                 {/* Soft Vignette Overlay */}
                 <radialGradient id="heroVignette" cx="50%" cy="25%" r="80%">
                   <stop offset="30%" stopColor="rgba(10, 34, 64, 0)" />
-                  <stop offset="100%" stopColor="rgba(10, 34, 64, 0.65)" />
+                  <stop offset="100%" stopColor="rgba(10, 34, 64, 0.6)" />
                 </radialGradient>
 
                 {/* Drop Shadow for Orbit Arcs */}
                 <filter id="heroArcShadow" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="6" stdDeviation="10" floodColor="rgba(10, 34, 64, 0.35)" />
+                  <feDropShadow dx="0" dy="5" stdDeviation="8" floodColor="rgba(10, 34, 64, 0.3)" />
                 </filter>
-
-                {/* Wave Gradient */}
-                <linearGradient id="waveLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#38BDF8" />
-                  <stop offset="50%" stopColor="#E85A2A" />
-                  <stop offset="100%" stopColor="#38BDF8" />
-                </linearGradient>
               </defs>
 
               {/* === THE GIANT SEMICIRCULAR PHOTO BOWL === */}
               <g clipPath="url(#heroPhotoBowlClip)">
                 {/* Dark Navy Deep Studio Base */}
-                <rect x="20" y="0" width="800" height="460" fill="#0A2240" />
+                <rect x="35" y="0" width="770" height="430" fill="#0A2240" />
 
                 {/* Blended High-Tech Voice Network Texture */}
                 <image 
                   href="/images/hero-cluster.jpg" 
-                  x="20" 
+                  x="35" 
                   y="0" 
-                  width="800" 
-                  height="440" 
+                  width="770" 
+                  height="400" 
                   preserveAspectRatio="xMidYMid slice" 
-                  opacity="0.42"
+                  opacity="0.38"
                   style={{ mixBlendMode: 'luminosity' }}
                 />
 
-                {/* Oscillating Sound Wave Curve inside the Bowl */}
-                <g opacity="0.6">
-                  <path 
-                    d="M 60,180 Q 140,120 220,180 T 380,180 T 540,180 T 700,180 T 780,180" 
-                    fill="none" 
-                    stroke="url(#waveLineGrad)" 
-                    strokeWidth="2.5" 
-                    strokeDasharray="4 4"
-                    className="inner-sound-wave"
-                  />
-                  <path 
-                    d="M 60,210 Q 160,270 260,210 T 460,210 T 660,210 T 780,210" 
-                    fill="none" 
-                    stroke="#38BDF8" 
-                    strokeWidth="2" 
-                    opacity="0.5"
-                  />
-                </g>
-
                 {/* Vignette Overlay */}
-                <rect x="20" y="0" width="800" height="460" fill="url(#heroVignette)" />
+                <rect x="35" y="0" width="770" height="430" fill="url(#heroVignette)" />
 
                 {/* Top Border */}
-                <line x1="20" y1="1" x2="820" y2="1" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="2" />
+                <line x1="35" y1="1" x2="805" y2="1" stroke="rgba(255, 255, 255, 0.15)" strokeWidth="2" />
               </g>
 
-              {/* === CONCENTRIC ORBIT STROKES (Signature Geometry) === */}
+              {/* === CONCENTRIC ORBIT STROKES === */}
               {/* 1. Left Arc: Electric Cyan */}
               <path 
-                d="M 30,135 A 415,415 0 0,0 270,395" 
+                d="M 41,123 A 399,399 0 0,0 271,370" 
                 stroke="#38BDF8" 
-                strokeWidth="8" 
+                strokeWidth="7.5" 
                 strokeLinecap="round" 
                 filter="url(#heroArcShadow)"
               />
 
               {/* 2. Bottom-Right Arc: Dark Navy */}
               <path 
-                d="M 385,418 A 408,408 0 0,0 765,235" 
+                d="M 379,391 A 393,393 0 0,0 746,220" 
                 stroke="#0A2240" 
-                strokeWidth="9" 
+                strokeWidth="8.5" 
                 strokeLinecap="round" 
               />
 
               {/* 3. Bottom Outer Arc: Soft Sky Blue */}
               <path 
-                d="M 180,365 A 428,428 0 0,0 610,400" 
+                d="M 184,338 A 412,412 0 0,0 594,373" 
                 stroke="#BAE6FD" 
-                strokeWidth="6.5" 
+                strokeWidth="6" 
                 strokeLinecap="round" 
               />
             </svg>
@@ -198,104 +148,48 @@ export default function Hero() {
       </div>
 
       {/* ========================================================================= */}
-      {/* EXTENDED HERO DOWN: LIVE VOICE SIGNAL INTELLIGENCE SPECTRUM VISUALIZER   */}
+      {/* EXTENDED HERO DOWN: GLOWING NEON VOICE SIGNAL WAVEFORM (ATTACHMENT MATCH) */}
       {/* ========================================================================= */}
-      <div className="container hero-signal-container">
-        <div className="voice-signal-card">
+      <div className="voice-signal-hero-banner">
+        <div className="container signal-inner-container">
           
-          {/* Signal Header Bar */}
-          <div className="signal-header-bar">
-            <div className="signal-title-group">
-              <span className={`signal-live-beacon ${isPlaying ? 'pulsing' : ''}`}></span>
-              <div className="signal-icon-box">
-                <Radio size={14} className="text-coral" />
+          <div className="signal-glow-frame">
+            {/* Ambient Background Aura behind the Wave */}
+            <div className="signal-aura-glow"></div>
+
+            {/* Glowing Voice Waveform Visual */}
+            <div className="signal-image-wrapper">
+              <img 
+                src="/images/voice-signal-hero.png" 
+                alt="Dovell Voice Intelligence Signal Waveform"
+                className="signal-waveform-img"
+              />
+              
+              {/* Subtle Animated Luminous Shimmer Scanline */}
+              <div className="signal-scanline-sweep"></div>
+              
+              {/* Vignette Gradients for Flawless Blending */}
+              <div className="signal-edge-fade-left"></div>
+              <div className="signal-edge-fade-right"></div>
+              <div className="signal-edge-fade-bottom"></div>
+            </div>
+
+            {/* Minimalist Tech Badges Floating on the Waveform */}
+            <div className="signal-floating-tags">
+              <div className="signal-chip chip-left">
+                <span className="pulse-dot-violet"></span>
+                <span className="chip-text">48 kHz ACOUSTIC SIGNAL</span>
               </div>
-              <span className="signal-title-text">LIVE VOICE SIGNAL SPECTRUM</span>
-              <span className="signal-channel-badge">CH-01 · 48 kHz / 24-BIT</span>
-            </div>
-
-            <div className="signal-meta-stats">
-              <div className="signal-meta-item">
-                <span className="meta-lbl">SIGNAL LEVEL:</span>
-                <span className="meta-val text-cyan">{isPlaying ? `${signalLevel}%` : 'STANDBY'}</span>
+              <div className="signal-chip chip-center">
+                <Activity size={12} className="text-pink" />
+                <span className="chip-text">REAL-TIME VOICE SPECTRUM</span>
               </div>
-              <div className="signal-meta-item">
-                <span className="meta-lbl">SNR:</span>
-                <span className="meta-val text-green">+34.8 dB</span>
+              <div className="signal-chip chip-right">
+                <span className="pulse-dot-coral"></span>
+                <span className="chip-text">LOSSLESS VOICE INGESTION</span>
               </div>
-              <div className="signal-meta-item">
-                <span className="meta-lbl">VOICE DETECT:</span>
-                <span className="meta-val text-amber">ACTIVE</span>
-              </div>
-              <button 
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="signal-toggle-btn"
-                title={isPlaying ? 'Pause voice signal' : 'Play voice signal'}
-              >
-                {isPlaying ? <Pause size={12} /> : <Play size={12} />}
-                <span>{isPlaying ? 'LIVE' : 'PAUSED'}</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Dynamic Frequency Waveform Visualizer */}
-          <div className="waveform-spectrum-stage">
-            <div className="waveform-bars-track">
-              {waveBars.map((height, idx) => {
-                // Determine color tone depending on position and amplitude
-                const isPeak = height > 75;
-                const isMid = height > 45 && height <= 75;
-                const barColor = isPeak ? '#E85A2A' : (isMid ? '#38BDF8' : '#7DD3FC');
-                const animDuration = 0.8 + (idx % 7) * 0.15;
-                const animDelay = (idx * 0.04) % 0.6;
-
-                return (
-                  <div 
-                    key={idx} 
-                    className="wave-bar-col"
-                  >
-                    <span 
-                      className={`signal-wave-bar ${isPlaying ? 'animating' : ''}`}
-                      style={{ 
-                        '--bar-height': `${height}%`,
-                        '--bar-color': barColor,
-                        '--anim-duration': `${animDuration}s`,
-                        '--anim-delay': `${animDelay}s`,
-                        height: isPlaying ? undefined : `${Math.max(12, height * 0.4)}%`
-                      }}
-                    ></span>
-                  </div>
-                );
-              })}
             </div>
 
-            {/* Center Zero-Crossing Audio Baseline Axis */}
-            <div className="spectrum-axis-line"></div>
-          </div>
-
-          {/* Frequency Labels Track */}
-          <div className="frequency-labels-row">
-            <span>60 Hz</span>
-            <span>125 Hz</span>
-            <span>250 Hz</span>
-            <span>500 Hz</span>
-            <span>1 kHz</span>
-            <span>2 kHz</span>
-            <span>4 kHz</span>
-            <span>8 kHz</span>
-            <span>16 kHz</span>
-            <span>20 kHz</span>
-          </div>
-
-          {/* Signal Footer Note */}
-          <div className="signal-footer-row">
-            <div className="signal-footnote">
-              <Activity size={13} className="text-coral" />
-              <span>Real-time voice stream ingestion: Multi-channel acoustic processing &amp; topic boundary detection</span>
-            </div>
-            <div className="signal-code-label">
-              <span>DOVELL AUDIO ENGINE v4.2 · ZERO LATENCY PIPELINE</span>
-            </div>
           </div>
 
         </div>
@@ -306,11 +200,13 @@ export default function Hero() {
           background-color: #FFFFFF;
           position: relative;
           width: 100%;
-          min-height: 760px;
+          min-height: 780px;
           overflow: hidden;
           border-bottom: 1px solid #E2E8F0;
           padding-top: 0;
-          padding-bottom: 64px;
+          padding-bottom: 40px;
+          display: flex;
+          flex-direction: column;
         }
 
         .hero-container {
@@ -322,14 +218,15 @@ export default function Hero() {
           max-width: 1360px;
           margin: 0 auto;
           padding: 0 32px;
+          flex: 1;
         }
 
         /* Left Content Column */
         .hero-content-col {
           display: flex;
           flex-direction: column;
-          padding-top: 54px;
-          padding-bottom: 40px;
+          padding-top: 50px;
+          padding-bottom: 30px;
           z-index: 2;
           max-width: 530px;
         }
@@ -473,18 +370,6 @@ export default function Hero() {
           color: #E85A2A;
         }
 
-        .text-cyan {
-          color: #38BDF8;
-        }
-
-        .text-green {
-          color: #10B981;
-        }
-
-        .text-amber {
-          color: #F59E0B;
-        }
-
         /* Right Column: Giant Semicircle Visual */
         .hero-visual-col {
           display: flex;
@@ -514,247 +399,174 @@ export default function Hero() {
         }
 
         /* ========================================================================= */
-        /* EXTENDED HERO DOWN: LIVE VOICE SIGNAL INTELLIGENCE SPECTRUM VISUALIZER   */
+        /* EXTENDED HERO DOWN: GLOWING NEON VOICE SIGNAL WAVEFORM                    */
         /* ========================================================================= */
-        .hero-signal-container {
-          max-width: 1360px;
-          margin: 28px auto 0;
-          padding: 0 32px;
+        .voice-signal-hero-banner {
+          width: 100%;
+          margin-top: 10px;
           position: relative;
           z-index: 5;
         }
 
-        .voice-signal-card {
-          background: #0A1C36;
-          border-radius: 20px;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          padding: 22px 28px;
-          box-shadow: 0 16px 40px rgba(10, 28, 54, 0.22);
-          position: relative;
-          overflow: hidden;
+        .signal-inner-container {
+          max-width: 1360px;
+          margin: 0 auto;
+          padding: 0 32px;
         }
 
-        .voice-signal-card::before {
-          content: '';
+        .signal-glow-frame {
+          position: relative;
+          width: 100%;
+          background: #020617;
+          border-radius: 24px;
+          overflow: hidden;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          box-shadow: 0 20px 50px -10px rgba(10, 28, 54, 0.4), 0 0 30px rgba(124, 58, 237, 0.15);
+        }
+
+        .signal-aura-glow {
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+          background: radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.25) 0%, transparent 50%),
+                      radial-gradient(circle at 85% 50%, rgba(232, 90, 42, 0.25) 0%, transparent 50%);
           pointer-events: none;
-        }
-
-        .signal-header-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-          padding-bottom: 14px;
-          margin-bottom: 18px;
-          flex-wrap: wrap;
-          gap: 12px;
-        }
-
-        .signal-title-group {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        .signal-live-beacon {
-          width: 9px;
-          height: 9px;
-          border-radius: 50%;
-          background: #10B981;
-          box-shadow: 0 0 10px #10B981;
-        }
-
-        .signal-live-beacon.pulsing {
-          animation: beaconPulse 1.8s infinite;
-        }
-
-        @keyframes beaconPulse {
-          0% { transform: scale(0.95); opacity: 0.8; }
-          50% { transform: scale(1.35); opacity: 1; box-shadow: 0 0 14px #10B981; }
-          100% { transform: scale(0.95); opacity: 0.8; }
-        }
-
-        .signal-icon-box {
-          display: flex;
-          align-items: center;
-        }
-
-        .signal-title-text {
-          font-family: var(--font-mono);
-          font-size: 0.84rem;
-          font-weight: 800;
-          letter-spacing: 0.06em;
-          color: #FFFFFF;
-        }
-
-        .signal-channel-badge {
-          font-family: var(--font-mono);
-          font-size: 0.65rem;
-          font-weight: 700;
-          background: rgba(56, 189, 248, 0.15);
-          color: #38BDF8;
-          border: 1px solid rgba(56, 189, 248, 0.3);
-          padding: 3px 8px;
-          border-radius: var(--radius-full);
-          letter-spacing: 0.05em;
-        }
-
-        .signal-meta-stats {
-          display: flex;
-          align-items: center;
-          gap: 18px;
-          font-family: var(--font-mono);
-          font-size: 0.74rem;
-        }
-
-        .signal-meta-item {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-        }
-
-        .meta-lbl {
-          color: #64748B;
-          font-weight: 600;
-        }
-
-        .meta-val {
-          font-weight: 700;
-        }
-
-        .signal-toggle-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: rgba(255, 255, 255, 0.08);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          color: #FFFFFF;
-          padding: 4px 12px;
-          border-radius: var(--radius-full);
-          font-size: 0.7rem;
-          font-weight: 700;
-          font-family: var(--font-mono);
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .signal-toggle-btn:hover {
-          background: rgba(232, 90, 42, 0.2);
-          border-color: #E85A2A;
-          color: #E85A2A;
-        }
-
-        /* Waveform Spectrum Stage */
-        .waveform-spectrum-stage {
-          position: relative;
-          height: 100px;
-          background: rgba(6, 17, 33, 0.75);
-          border-radius: 12px;
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          padding: 12px 18px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-        }
-
-        .waveform-bars-track {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          width: 100%;
-          height: 100%;
-          gap: 4px;
-          position: relative;
-          z-index: 2;
-        }
-
-        .wave-bar-col {
-          flex: 1;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .signal-wave-bar {
-          width: 100%;
-          max-width: 6px;
-          background-color: var(--bar-color);
-          border-radius: 3px;
-          transition: height 0.2s ease;
-          box-shadow: 0 0 8px rgba(56, 189, 248, 0.35);
-        }
-
-        .signal-wave-bar.animating {
-          animation: wavePulse var(--anim-duration) ease-in-out infinite alternate;
-          animation-delay: var(--anim-delay);
-        }
-
-        @keyframes wavePulse {
-          0% {
-            height: 14%;
-            opacity: 0.45;
-          }
-          50% {
-            height: var(--bar-height);
-            opacity: 0.95;
-          }
-          100% {
-            height: calc(var(--bar-height) * 0.7 + 10%);
-            opacity: 0.85;
-          }
-        }
-
-        .spectrum-axis-line {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 50%;
-          height: 1px;
-          background: rgba(255, 255, 255, 0.1);
           z-index: 1;
         }
 
-        /* Frequency Axis Labels */
-        .frequency-labels-row {
+        .signal-image-wrapper {
+          position: relative;
+          width: 100%;
+          height: 195px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          background: #000000;
+        }
+
+        .signal-waveform-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center bottom;
+          display: block;
+          filter: contrast(1.1) brightness(1.05);
+          transition: transform 0.8s ease;
+        }
+
+        .signal-glow-frame:hover .signal-waveform-img {
+          transform: scale(1.02);
+        }
+
+        /* Shimmer sweep animation */
+        .signal-scanline-sweep {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -100%;
+          width: 60%;
+          background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+          transform: skewX(-20deg);
+          animation: shimmerWave 6s infinite ease-in-out;
+          pointer-events: none;
+          z-index: 2;
+        }
+
+        @keyframes shimmerWave {
+          0% { left: -100%; }
+          50% { left: 160%; }
+          100% { left: 160%; }
+        }
+
+        /* Edge fades for smooth cinematic blending */
+        .signal-edge-fade-left {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 80px;
+          background: linear-gradient(90deg, #020617 0%, transparent 100%);
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .signal-edge-fade-right {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          width: 80px;
+          background: linear-gradient(270deg, #020617 0%, transparent 100%);
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .signal-edge-fade-bottom {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 24px;
+          background: linear-gradient(0deg, rgba(2, 6, 23, 0.8) 0%, transparent 100%);
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        /* Floating Minimalist Chips */
+        .signal-floating-tags {
+          position: absolute;
+          top: 14px;
+          left: 20px;
+          right: 20px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          z-index: 4;
+          pointer-events: none;
+        }
+
+        .signal-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(10, 28, 54, 0.85);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: var(--radius-full);
+          padding: 4px 12px;
           font-family: var(--font-mono);
           font-size: 0.65rem;
-          color: #64748B;
-          padding: 8px 18px 0;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          color: #E2E8F0;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
         }
 
-        /* Signal Footer */
-        .signal-footer-row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-top: 14px;
-          padding-top: 12px;
-          border-top: 1px solid rgba(255, 255, 255, 0.06);
-          font-size: 0.74rem;
-          color: #94A3B8;
-          flex-wrap: wrap;
-          gap: 10px;
+        .pulse-dot-violet {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #A855F7;
+          box-shadow: 0 0 8px #A855F7;
+          animation: pulseDot 2s infinite;
         }
 
-        .signal-footnote {
-          display: flex;
-          align-items: center;
-          gap: 8px;
+        .pulse-dot-coral {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #E85A2A;
+          box-shadow: 0 0 8px #E85A2A;
+          animation: pulseDot 2s infinite 1s;
         }
 
-        .signal-code-label {
-          font-family: var(--font-mono);
-          font-size: 0.68rem;
-          color: #CBD5E1;
-          letter-spacing: 0.04em;
+        .text-pink {
+          color: #F43F5E;
+        }
+
+        @keyframes pulseDot {
+          0%, 100% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.4); opacity: 0.6; }
         }
 
         /* Responsive Breakpoints */
@@ -771,7 +583,7 @@ export default function Hero() {
         @media (max-width: 1024px) {
           .semicircle-hero-section {
             min-height: auto;
-            padding-bottom: 50px;
+            padding-bottom: 30px;
           }
           .hero-container {
             grid-template-columns: 1fr;
@@ -795,13 +607,11 @@ export default function Hero() {
           .hero-trust-row {
             white-space: normal;
           }
-          .hero-signal-container {
+          .signal-inner-container {
             padding: 0 24px;
-            margin-top: 20px;
           }
-          .signal-meta-stats {
-            flex-wrap: wrap;
-            gap: 10px;
+          .signal-image-wrapper {
+            height: 150px;
           }
         }
 
@@ -821,16 +631,14 @@ export default function Hero() {
             text-align: center;
             justify-content: center;
           }
-          .waveform-spectrum-stage {
-            height: 70px;
-            padding: 8px 10px;
+          .signal-image-wrapper {
+            height: 110px;
           }
-          .frequency-labels-row {
+          .signal-floating-tags {
+            justify-content: center;
+          }
+          .chip-left, .chip-right {
             display: none;
-          }
-          .signal-footer-row {
-            flex-direction: column;
-            align-items: flex-start;
           }
         }
       `}</style>
