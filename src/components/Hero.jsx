@@ -66,12 +66,14 @@ export default function Hero() {
         {/* Right Column: Person Wearing Headset inside Dark Circle with Concentric Orbit Arcs */}
         <div className="hero-visual-col">
           <div className="agent-circle-visual-wrapper">
-            {/* Real Graphic cropped cleanly from reference image */}
+            {/* Complete circular agent graphic with no cut-off edges */}
             <img 
-              src="/images/headset-agent-circle-transparent.png" 
+              src="/images/dovell-agent-circle.png" 
               alt="Dovell Voice Intelligence Agent" 
               className="agent-circle-img"
               loading="eager"
+              width={480}
+              height={480}
             />
           </div>
         </div>
@@ -267,24 +269,25 @@ export default function Hero() {
         .agent-circle-visual-wrapper {
           position: relative;
           width: 100%;
-          max-width: 520px;
+          max-width: 480px;
           display: flex;
           justify-content: center;
           align-items: center;
-          transition: transform 0.3s ease;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .agent-circle-visual-wrapper:hover {
-          transform: translateY(-4px);
+          transform: translateY(-4px) scale(1.015);
         }
 
         .agent-circle-img {
           width: 100%;
           height: auto;
-          max-height: 380px;
+          max-width: 460px;
+          aspect-ratio: 1 / 1;
           object-fit: contain;
           display: block;
-          filter: drop-shadow(0 14px 35px rgba(10, 28, 54, 0.14));
+          filter: drop-shadow(0 16px 40px rgba(10, 28, 54, 0.12));
         }
 
         /* Wide Full-Width Waveform at Bottom */
