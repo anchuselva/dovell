@@ -37,11 +37,11 @@ export default function VoiceWaveformCanvas() {
 
     // Number of vertical bars scaled smoothly with screen width
     const getBarCount = () => {
-      if (width < 480) return 56;
-      if (width < 768) return 76;
+      if (width < 480) return 52;
+      if (width < 768) return 72;
       if (width < 1024) return 96;
-      if (width < 1440) return 124;
-      return 140;
+      if (width < 1440) return 120;
+      return 136;
     };
 
     let startTime = performance.now();
@@ -53,10 +53,11 @@ export default function VoiceWaveformCanvas() {
       ctx.clearRect(0, 0, width, height);
 
       const numBars = getBarCount();
-      const centerY = height * 0.52;
-      const maxHalfHeight = height * 0.44;
+      const centerY = height * 0.50;
+      // Prominent, tall voice spindle amplitude ("make little big")
+      const maxHalfHeight = height * 0.46;
       const barSpacing = width / numBars;
-      const barWidth = Math.max(2.8, Math.min(5.2, barSpacing * 0.56));
+      const barWidth = Math.max(3.2, Math.min(6.2, barSpacing * 0.58));
 
       // -----------------------------------------------------------
       // 1. Draw Waveform Bars with Voice Energy Spindles
@@ -68,14 +69,14 @@ export default function VoiceWaveformCanvas() {
         // Base Envelope: Multiple speech spindle bursts (matching reference image)
         // Spindle 1 (left): ~0.16
         // Spindle 2 (center-left): ~0.36
-        // Spindle 3 (dominant center-right): ~0.56 (highest vocal crest)
-        // Spindle 4 (right cluster): ~0.76
-        // Spindle 5 (right edge): ~0.90
-        const g1 = Math.exp(-Math.pow((normX - 0.16) / 0.08, 2)) * 0.72;
-        const g2 = Math.exp(-Math.pow((normX - 0.36) / 0.07, 2)) * 0.62;
-        const g3 = Math.exp(-Math.pow((normX - 0.56) / 0.10, 2)) * 0.98; // Highest central voice peak
-        const g4 = Math.exp(-Math.pow((normX - 0.75) / 0.07, 2)) * 0.68;
-        const g5 = Math.exp(-Math.pow((normX - 0.89) / 0.07, 2)) * 0.82; // Right spindle
+        // Spindle 3 (dominant central crest): ~0.56 (highest vocal peak)
+        // Spindle 4 (right cluster): ~0.75
+        // Spindle 5 (right edge): ~0.89
+        const g1 = Math.exp(-Math.pow((normX - 0.16) / 0.08, 2)) * 0.74;
+        const g2 = Math.exp(-Math.pow((normX - 0.36) / 0.07, 2)) * 0.65;
+        const g3 = Math.exp(-Math.pow((normX - 0.56) / 0.10, 2)) * 1.0; // Central voice peak
+        const g4 = Math.exp(-Math.pow((normX - 0.75) / 0.07, 2)) * 0.72;
+        const g5 = Math.exp(-Math.pow((normX - 0.89) / 0.07, 2)) * 0.85; // Right spindle
 
         // Background baseline energy
         const baseShape = Math.max(0.12, g1 + g2 + g3 + g4 + g5);
@@ -88,7 +89,7 @@ export default function VoiceWaveformCanvas() {
             + 0.10 * Math.sin(t * 4.2 - i * 0.35) 
             + 0.08 * Math.cos(t * 1.6 + i * 0.15);
 
-        const currentHalfH = Math.max(5, baseShape * maxHalfHeight * waveMovement);
+        const currentHalfH = Math.max(6, baseShape * maxHalfHeight * waveMovement);
 
         // Bar Color Gradient: Electric Cyan at tips, Sky Blue in body, Rich Cyan at center
         const topY = centerY - currentHalfH;
@@ -120,7 +121,7 @@ export default function VoiceWaveformCanvas() {
       ctx.beginPath();
       const waveSpeed = t * 1.8;
       const waveFreq = 0.012;
-      const waveAmp = height * 0.18;
+      const waveAmp = height * 0.22; // Larger amplitude for clear wave motion
 
       for (let px = 0; px <= width; px += 3) {
         // Dual harmonic traveling wave
@@ -136,9 +137,9 @@ export default function VoiceWaveformCanvas() {
       }
 
       ctx.strokeStyle = '#38BDF8';
-      ctx.lineWidth = 2.0;
-      ctx.shadowColor = 'rgba(56, 189, 248, 0.5)';
-      ctx.shadowBlur = 8;
+      ctx.lineWidth = 2.4;
+      ctx.shadowColor = 'rgba(56, 189, 248, 0.6)';
+      ctx.shadowBlur = 10;
       ctx.stroke();
       ctx.restore();
 
@@ -149,7 +150,7 @@ export default function VoiceWaveformCanvas() {
       ctx.beginPath();
       const wave2Speed = t * 1.3 + 1.2;
       const wave2Freq = 0.009;
-      const wave2Amp = height * 0.22;
+      const wave2Amp = height * 0.26;
 
       for (let px = 0; px <= width; px += 4) {
         const py = centerY 
@@ -163,8 +164,8 @@ export default function VoiceWaveformCanvas() {
         }
       }
 
-      ctx.strokeStyle = 'rgba(186, 230, 253, 0.45)';
-      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = 'rgba(186, 230, 253, 0.5)';
+      ctx.lineWidth = 1.4;
       ctx.stroke();
       ctx.restore();
 
@@ -184,19 +185,19 @@ export default function VoiceWaveformCanvas() {
           + Math.sin(nx * waveFreq - waveSpeed) * waveAmp
           + Math.sin(nx * 0.024 + waveSpeed * 0.6) * (waveAmp * 0.35);
 
-        // Draw Outer Orange Pulse Halo
+        // Draw Outer Orange Pulse Halo (larger, luminous)
         ctx.save();
         ctx.beginPath();
-        ctx.arc(nx, ny, 7.5, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(232, 90, 42, 0.22)';
+        ctx.arc(nx, ny, 9, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(232, 90, 42, 0.25)';
         ctx.fill();
 
         // Draw Core Orange Highlight Dot
         ctx.beginPath();
-        ctx.arc(nx, ny, 3.8, 0, Math.PI * 2);
+        ctx.arc(nx, ny, 4.4, 0, Math.PI * 2);
         ctx.fillStyle = '#E85A2A';
         ctx.shadowColor = '#E85A2A';
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 12;
         ctx.fill();
         ctx.restore();
       }
@@ -221,12 +222,12 @@ export default function VoiceWaveformCanvas() {
         .voice-waveform-container {
           position: relative;
           width: 100%;
-          height: 160px;
+          height: 230px;
           overflow: hidden;
           background: transparent;
           pointer-events: none;
           user-select: none;
-          margin-top: 10px;
+          margin-top: 14px;
         }
 
         .voice-waveform-canvas {
@@ -237,10 +238,17 @@ export default function VoiceWaveformCanvas() {
           display: block;
         }
 
+        @media (max-width: 1024px) {
+          .voice-waveform-container {
+            height: 180px;
+            margin-top: 10px;
+          }
+        }
+
         @media (max-width: 768px) {
           .voice-waveform-container {
-            height: 115px;
-            margin-top: 6px;
+            height: 140px;
+            margin-top: 8px;
           }
         }
       `}</style>
