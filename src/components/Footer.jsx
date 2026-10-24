@@ -37,14 +37,12 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="footer-brand-column">
             <a href="#" className="footer-brand-logo" aria-label="Dovell Home">
-              <div className="footer-logo-icon">
-                <Headphones size={22} className="coral-text" />
-                <span className="logo-sparkle"></span>
-              </div>
-              <div className="footer-logo-text">
-                <span className="footer-brand-name">DOVELL</span>
-                <span className="footer-brand-sub">VOICE INTELLIGENCE &amp; ANALYTICS</span>
-              </div>
+              <img 
+                src="/graphics/logo.svg" 
+                alt="DOVELL" 
+                className="footer-logo-brand-img"
+                height={46}
+              />
             </a>
 
             <p className="brand-tagline">Voice Intelligence & Conversation Analytics</p>
@@ -162,23 +160,18 @@ export default function Footer() {
         }
 
         .footer-brand-logo {
-          display: flex;
+          display: inline-flex;
           align-items: center;
-          gap: 12px;
           text-decoration: none;
-          margin-bottom: 14px;
+          margin-bottom: 16px;
         }
 
-        .footer-logo-icon {
-          position: relative;
-          width: 38px;
-          height: 38px;
-          border-radius: 8px;
-          background: #0F274B;
-          border: 1px solid rgba(232, 90, 42, 0.4);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        .footer-logo-brand-img {
+          height: 56px;
+          width: auto;
+          max-width: 230px;
+          object-fit: contain;
+          display: block;
         }
 
         .coral-text {

@@ -10,9 +10,21 @@ import VoiceWaveformCanvas from './VoiceWaveformCanvas';
 export default function Hero() {
   return (
     <section id="platform" className="dovell-hero-section">
+      {/* Full Cover Panoramic Background Graphic */}
+      <div className="hero-cover-bg-wrap" aria-hidden="true">
+        <img 
+          src="/graphics/hero-extracted.png" 
+          alt="Dovell Voice Intelligence Cover" 
+          className="hero-cover-bg-img"
+          loading="eager"
+        />
+        {/* Soft Frost/Gradient Overlay ensuring 100% text legibility on the left, full image clarity on the right */}
+        <div className="hero-cover-gradient-overlay"></div>
+        <div className="hero-cover-bottom-fade"></div>
+      </div>
+
       <div className="hero-top-container">
-        
-        {/* Left Column: Headline, Description, Dual Action Buttons & Trust Labels */}
+        {/* Left Content Area: Headline, Description, Dual Action Buttons & Trust Labels */}
         <div className="hero-content-col">
           
           {/* Eyebrow Pill Badge */}
@@ -21,16 +33,16 @@ export default function Hero() {
             <span>VOICE INTELLIGENCE &amp; CONVERSATION ANALYTICS</span>
           </div>
 
-          {/* Headline with 3 Distinct Rows and Violet/Blue Accent */}
+          {/* Headline with 3 Distinct Rows and Coral Orange Accent */}
           <h1 className="hero-headline">
-            <span className="hl-row">Every conversation</span>
-            <span className="hl-row">holds insight.</span>
-            <span className="hl-row hero-accent-text">Bring yours into focus.</span>
+            <span className="hl-row">Conversations Hold</span>
+            <span className="hl-row">Hidden Signals.</span>
+            <span className="hl-row hero-accent-text">Bring Them Into Focus.</span>
           </h1>
 
           {/* Value Proposition Description */}
           <p className="hero-description-text">
-            Organize audio recordings, review transcripts, and uncover recurring topics in one centralized workspace. Dovell helps your team turn voice interactions into searchable records, structured reviews, and clear conversation outcomes.
+            Organize voice recordings, review transcripts, and uncover meaningful conversation patterns in one centralized workspace. Dovell helps your team transform voice interactions into searchable records, structured evaluations, and actionable insights.
           </p>
 
           {/* Dual Pill Action Buttons */}
@@ -62,50 +74,86 @@ export default function Hero() {
             </div>
           </div>
         </div>
-
-        {/* Right Column: Person Wearing Headset inside Dark Circle with Concentric Orbit Arcs */}
-        <div className="hero-visual-col">
-          <div className="agent-circle-visual-wrapper">
-            {/* Complete circular agent graphic with no cut-off edges */}
-            <img 
-              src="/images/dovell-agent-circle.png" 
-              alt="Dovell Voice Intelligence Agent" 
-              className="agent-circle-img"
-              loading="eager"
-              width={480}
-              height={480}
-            />
-          </div>
-        </div>
-
       </div>
 
-      {/* Wide Animated Audio Waveform Stretching Across Hero Below BOTH Text & Circle */}
+      {/* Wide Animated Audio Waveform Stretching Across Hero Base */}
       <div className="hero-waveform-fullwidth">
         <VoiceWaveformCanvas />
       </div>
 
       <style jsx>{`
         .dovell-hero-section {
-          background-color: #FFFFFF;
+          background-color: #F8FAFC;
           position: relative;
           width: 100%;
-          min-height: 580px;
+          min-height: 640px;
           overflow: hidden;
           border-bottom: 1px solid #E2E8F0;
-          padding-top: 24px;
-          padding-bottom: 0px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        /* Full Cover Background Graphic */
+        .hero-cover-bg-wrap {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+          overflow: hidden;
+          pointer-events: none;
+        }
+
+        .hero-cover-bg-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: right 25%;
+          display: block;
+          filter: brightness(1.15) contrast(1.05) saturate(1.08);
+        }
+
+        /* Subtle gradient overlay: gives crisp contrast behind left text without dimming the picture */
+        .hero-cover-gradient-overlay {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.94) 0%,
+            rgba(255, 255, 255, 0.85) 30%,
+            rgba(255, 255, 255, 0.45) 44%,
+            rgba(255, 255, 255, 0.08) 58%,
+            transparent 72%
+          );
+        }
+
+        .hero-cover-bottom-fade {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 80px;
+          background: linear-gradient(
+            180deg, 
+            transparent 0%, 
+            rgba(255, 255, 255, 0.4) 60%,
+            #FFFFFF 100%
+          );
+          pointer-events: none;
+          z-index: 1;
         }
 
         .hero-top-container {
-          display: grid;
-          grid-template-columns: 530px 1fr;
+          display: flex;
           align-items: center;
-          gap: 36px;
           position: relative;
+          width: 100%;
           max-width: 1360px;
           margin: 0 auto;
-          padding: 10px 32px 0 32px;
+          padding: 56px 32px 10px 32px;
           z-index: 2;
         }
 
@@ -113,9 +161,8 @@ export default function Hero() {
         .hero-content-col {
           display: flex;
           flex-direction: column;
-          padding-top: 20px;
-          padding-bottom: 24px;
-          max-width: 530px;
+          max-width: 580px;
+          z-index: 2;
         }
 
         .hero-tag-badge {
@@ -123,7 +170,8 @@ export default function Hero() {
           align-items: center;
           gap: 8px;
           padding: 6px 14px;
-          background-color: #F8FAFC;
+          background-color: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(8px);
           border: 1px solid #E2E8F0;
           border-radius: var(--radius-full);
           font-family: var(--font-mono);
@@ -133,6 +181,7 @@ export default function Hero() {
           letter-spacing: 0.05em;
           margin-bottom: 20px;
           width: fit-content;
+          box-shadow: 0 2px 8px rgba(10, 28, 54, 0.04);
         }
 
         .hero-tag-dot {
@@ -148,9 +197,9 @@ export default function Hero() {
           display: flex;
           flex-direction: column;
           font-family: var(--font-primary);
-          font-size: clamp(2.2rem, 2.9vw, 3rem);
+          font-size: clamp(2.3rem, 3.2vw, 3.2rem);
           font-weight: 800;
-          line-height: 1.14;
+          line-height: 1.12;
           color: #0A1C36;
           letter-spacing: -0.03em;
           margin: 0 0 20px 0;
@@ -162,8 +211,8 @@ export default function Hero() {
         }
 
         .hero-accent-text {
-          color: #7C3AED;
-          background: linear-gradient(135deg, #7C3AED 0%, #6366F1 50%, #0284C7 100%);
+          color: #E85A2A;
+          background: linear-gradient(135deg, #FF6B35 0%, #E85A2A 60%, #D0481B 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           display: inline-block;
@@ -171,11 +220,11 @@ export default function Hero() {
 
         .hero-description-text {
           font-family: var(--font-primary);
-          font-size: 1.02rem;
-          line-height: 1.65;
-          color: #475569;
+          font-size: 1.05rem;
+          line-height: 1.68;
+          color: #334155;
           font-weight: 500;
-          max-width: 500px;
+          max-width: 530px;
           margin: 0 0 28px 0;
         }
 
@@ -220,14 +269,15 @@ export default function Hero() {
         }
 
         .hero-pill-secondary {
-          background: #FFFFFF;
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(8px);
           color: #0A1C36;
           border: 2px solid #CBD5E1;
         }
 
         .hero-pill-secondary:hover {
           border-color: #0A1C36;
-          background: #F8FAFC;
+          background: #FFFFFF;
           transform: translateY(-2px);
         }
 
@@ -237,9 +287,9 @@ export default function Hero() {
           align-items: center;
           gap: 12px;
           font-family: var(--font-primary);
-          font-size: 0.83rem;
-          color: #64748B;
-          font-weight: 500;
+          font-size: 0.85rem;
+          color: #475569;
+          font-weight: 600;
           white-space: nowrap;
         }
 
@@ -257,81 +307,48 @@ export default function Hero() {
           color: #E85A2A;
         }
 
-        /* Right Column: Circular Agent Visual */
-        .hero-visual-col {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 100%;
-          position: relative;
-        }
-
-        .agent-circle-visual-wrapper {
-          position: relative;
-          width: 100%;
-          max-width: 480px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .agent-circle-visual-wrapper:hover {
-          transform: translateY(-4px) scale(1.015);
-        }
-
-        .agent-circle-img {
-          width: 100%;
-          height: auto;
-          max-width: 460px;
-          aspect-ratio: 1 / 1;
-          object-fit: contain;
-          display: block;
-          filter: drop-shadow(0 16px 40px rgba(10, 28, 54, 0.12));
-        }
-
         /* Wide Full-Width Waveform at Bottom */
         .hero-waveform-fullwidth {
           width: 100%;
-          height: 240px;
+          height: 200px;
           position: relative;
-          z-index: 1;
-          margin-top: 14px;
+          z-index: 2;
+          margin-top: 10px;
           overflow: hidden;
           line-height: 0;
+          pointer-events: none;
         }
 
         /* Responsive Breakpoints */
         @media (max-width: 1180px) {
-          .hero-top-container {
-            grid-template-columns: 480px 1fr;
-            gap: 24px;
-          }
           .hero-headline {
-            font-size: 2.4rem;
+            font-size: 2.6rem;
+          }
+          .hero-content-col {
+            max-width: 520px;
           }
         }
 
         @media (max-width: 1024px) {
           .dovell-hero-section {
             min-height: auto;
-            padding-top: 16px;
+          }
+          .hero-cover-bg-img {
+            object-position: 70% center;
+          }
+          .hero-cover-gradient-overlay {
+            background: linear-gradient(
+              180deg,
+              rgba(255, 255, 255, 0.92) 0%,
+              rgba(255, 255, 255, 0.82) 48%,
+              rgba(255, 255, 255, 0.65) 100%
+            );
           }
           .hero-top-container {
-            grid-template-columns: 1fr;
-            gap: 30px;
-            padding: 0 24px;
+            padding: 40px 24px 10px 24px;
           }
           .hero-content-col {
-            padding-top: 20px;
-            padding-bottom: 10px;
             max-width: 100%;
-          }
-          .hero-visual-col {
-            justify-content: center;
-          }
-          .agent-circle-visual-wrapper {
-            max-width: 440px;
           }
           .hero-pill-buttons-row {
             flex-wrap: wrap;
@@ -340,8 +357,7 @@ export default function Hero() {
             white-space: normal;
           }
           .hero-waveform-fullwidth {
-            height: 185px;
-            margin-top: 10px;
+            height: 160px;
           }
         }
 
@@ -362,8 +378,8 @@ export default function Hero() {
             justify-content: center;
           }
           .hero-waveform-fullwidth {
-            height: 140px;
-            margin-top: 6px;
+            height: 130px;
+            margin-top: 4px;
           }
         }
       `}</style>

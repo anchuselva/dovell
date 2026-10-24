@@ -21,7 +21,7 @@ const CAPABILITIES = [
     category: 'CONVERSATION MANAGEMENT',
     badge: 'CENTRALIZED RECORDS',
     title: 'Keep every conversation in context',
-    image: '/images/control-room.jpg',
+    image: '/graphics/core-capa-1.png',
     description: 'Upload audio recordings and organize them with conversation details, team assignments, categories, and outcomes. Keep the original recording connected to its transcript and review history.',
     supportingLabels: [
       { label: 'Audio Uploads', icon: Upload },
@@ -37,7 +37,7 @@ const CAPABILITIES = [
     category: 'TRANSCRIPT REVIEW',
     badge: 'HUMAN VERIFICATION',
     title: 'Review transcripts with confidence',
-    image: '/images/gpu-slicing.jpg',
+    image: '/graphics/core-capa-2.png',
     description: 'Review generated or imported transcripts, correct wording, and track verification status. Help reviewers distinguish automated output from content checked by a person.',
     supportingLabels: [
       { label: 'Transcript Corrections', icon: FileText },
@@ -53,7 +53,7 @@ const CAPABILITIES = [
     category: 'CONVERSATION ANALYTICS',
     badge: 'CONFIGURABLE ANALYSIS',
     title: 'Find patterns across your conversations',
-    image: '/images/token-cache.jpg',
+    image: '/graphics/core-capa-3.png',
     description: 'Use configured analysis services to identify topics, keywords, and sentiment indicators. Combine those results with team tags and recorded outcomes to explore communication trends.',
     supportingLabels: [
       { label: 'Topic Analysis', icon: BarChart3 },
@@ -84,7 +84,7 @@ export default function FeatureEngines() {
         {/* Section Header */}
         <div className="section-header text-center">
           <span className="bracket-tag">CORE CAPABILITIES</span>
-          <h2 className="section-title">FROM RECORDED CONVERSATIONS TO ORGANIZED INSIGHTS</h2>
+          <h2 className="section-title">BRING STRUCTURE TO COMPLEX COMMUNICATIONS</h2>
           
           <div className="accent-lines center">
             <div className="accent-line-coral"></div>
@@ -92,7 +92,7 @@ export default function FeatureEngines() {
           </div>
 
           <p className="section-subtitle center-subtitle">
-            Keep audio, transcripts, analysis, and review activity connected throughout the conversation lifecycle.
+            Organize conversation records with searchable metadata, configurable classifications, and traceable review histories that simplify day-to-day operations.
           </p>
         </div>
 

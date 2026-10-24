@@ -40,69 +40,72 @@ const EnterpriseOrgIcon = () => (
 
 const PLANS = [
   {
-    step: 'Starter',
+    step: 'Echo',
     num: '01',
-    id: 'starter',
-    name: 'Starter Plan',
-    tagline: 'Organize your conversation records',
+    id: 'echo',
+    name: 'Echo Plan',
+    tagline: 'Organize Your Conversation Records',
     description: 'For smaller teams establishing a shared workspace for audio recordings and transcript reviews.',
-    priceLabel: 'Request Pricing',
-    priceSubtext: 'Tailored to monthly volume',
+    price: '$49',
+    period: '/ Month',
+    priceSubtext: 'Essential tools for conversation management',
     features: [
       'Audio uploads and conversation records',
       'Transcript storage and correction',
       'Search, tags, and categories',
       'Processing and review status tracking'
     ],
-    buttonText: 'Discuss Starter',
+    buttonText: 'Discuss Echo',
     popular: false,
     theme: {
       accent: '#0284C7',
-      ribbonLight: '#7DD3FC',
+      ribbonLight: '#BAE6FD',
       ribbonDark: '#0284C7',
-      numberColor: '#0369A1',
+      numberColor: '#0284C7',
       badgeBg: '#0284C7'
     },
     iconComponent: MicRecordIcon
   },
   {
-    step: 'Professional',
+    step: 'Resonance',
     num: '02',
-    id: 'professional',
-    name: 'Professional Plan',
-    tagline: 'Build a structured review practice',
+    id: 'resonance',
+    name: 'Resonance Plan',
+    tagline: 'Build A Structured Review Practice',
     description: 'For growing teams that need coordinated reviews, configurable analysis, and broader reporting.',
-    priceLabel: 'Request Pricing',
-    priceSubtext: 'Volume & seats based',
+    price: '$149',
+    period: '/ Month',
+    priceSubtext: 'Expanded tools for teams and analysis',
     features: [
-      'Everything in Starter',
+      'Everything in Echo',
       'Reviewer assignments and review history',
       'Configurable topics and keywords',
       'Analytics dashboards and reports',
       'Team access controls'
     ],
-    buttonText: 'Discuss Professional',
+    buttonText: 'Discuss Resonance',
     popular: true,
     theme: {
       accent: '#E85A2A',
-      ribbonLight: '#FDBA74',
+      ribbonLight: '#FED7AA',
       ribbonDark: '#EA580C',
-      numberColor: '#9A3412',
+      numberColor: '#C2410C',
       badgeBg: '#E85A2A'
     },
     iconComponent: TranscriptReviewIcon
   },
   {
-    step: 'Enterprise',
+    step: 'Sonata',
     num: '03',
-    id: 'enterprise',
-    name: 'Enterprise Plan',
-    tagline: 'Adapt Dovell to your organization',
+    id: 'sonata',
+    name: 'Sonata Plan',
+    tagline: 'Adapt Dovell To Your Organization',
     description: 'For organizations with multiple departments, higher conversation volumes, or custom implementation needs.',
-    priceLabel: 'Custom Pricing',
-    priceSubtext: 'Dedicated deployment & SLA',
+    price: 'Custom Pricing',
+    period: '',
+    priceSubtext: 'Tailored to organizational requirements',
     features: [
-      'Everything in Professional',
+      'Everything in Resonance',
       'Department and team configuration',
       'Custom integration scoping',
       'Storage and processing configuration',
@@ -112,7 +115,7 @@ const PLANS = [
     popular: false,
     theme: {
       accent: '#0A1C36',
-      ribbonLight: '#94A3B8',
+      ribbonLight: '#CBD5E1',
       ribbonDark: '#1E293B',
       numberColor: '#0A1C36',
       badgeBg: '#0A1C36'
@@ -195,20 +198,30 @@ export default function Pricing() {
 
                 {/* Card Body Content */}
                 <div className="card-col-body">
-                  <div className="step-row">
-                    <span className="step-label" style={{ color: plan.theme.accent }}>
-                      {plan.step}
-                    </span>
-                    <span className="tagline-pill">{plan.tagline}</span>
-                  </div>
+                  <div className="tier-header-block">
+                    <div className="step-row">
+                      <span 
+                        className="step-pill" 
+                        style={{ 
+                          color: plan.theme.accent,
+                          backgroundColor: `${plan.theme.accent}14`,
+                          borderColor: `${plan.theme.accent}33`
+                        }}
+                      >
+                        {plan.step}
+                      </span>
+                    </div>
 
-                  <h3 className="plan-name-text">{plan.name}</h3>
-                  <p className="plan-tagline-text">{plan.description}</p>
+                    <div className="plan-tagline-kicker">{plan.tagline}</div>
+                    <h3 className="plan-name-text">{plan.name}</h3>
+                    <p className="plan-tagline-text">{plan.description}</p>
+                  </div>
 
                   {/* Pricing Display Strip */}
                   <div className="price-box-strip">
                     <div className="price-amount-row">
-                      <span className="price-big">{plan.priceLabel}</span>
+                      <span className="price-big">{plan.price}</span>
+                      {plan.period && <span className="price-period">{plan.period}</span>}
                     </div>
                     <span className="billing-term-note">{plan.priceSubtext}</span>
                   </div>
@@ -224,7 +237,7 @@ export default function Pricing() {
 
                   {/* Feature Checklist */}
                   <div className="card-features-list">
-                    <span className="features-section-title">Proposed Inclusions:</span>
+                    <span className="features-section-title">PROPOSED INCLUSIONS:</span>
                     {plan.features.map((feat, fIdx) => (
                       <div key={fIdx} className="feature-check-line">
                         <div className="check-bullet" style={{ color: plan.theme.accent }}>
@@ -246,9 +259,9 @@ export default function Pricing() {
             <SlidersHorizontal size={26} className="text-coral" />
           </div>
           <div className="requirements-text">
-            <h4>Plan around your actual requirements</h4>
+            <h4>Find The Right Plan For Your Team</h4>
             <p>
-              Talk to us about conversation volume, review processes, processing services, and storage needs so we can define the right scope for your team.
+              Discuss your conversation volume, review workflows, processing requirements, and storage needs with our team to define a solution that fits your organization.
             </p>
           </div>
           <a href="#contact" className="btn-coral-pill banner-cta">
@@ -391,32 +404,33 @@ export default function Pricing() {
         .step-row {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          gap: 8px;
-          margin-bottom: 8px;
+          margin-bottom: 10px;
         }
 
-        .step-label {
-          font-size: 1.15rem;
+        .step-pill {
+          display: inline-flex;
+          align-items: center;
+          font-size: 0.78rem;
           font-weight: 800;
-          letter-spacing: -0.01em;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          padding: 4px 12px;
+          border-radius: var(--radius-full);
+          border: 1px solid;
+          font-family: var(--font-mono);
         }
 
-        .tagline-pill {
-          background: #F1F5F9;
-          color: #475569;
-          font-size: 0.72rem;
+        .plan-tagline-kicker {
+          font-size: 0.82rem;
           font-weight: 700;
-          padding: 3px 9px;
-          border-radius: var(--radius-full);
-          border: 1px solid var(--color-border-light);
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          color: #64748B;
+          letter-spacing: 0.02em;
+          margin-bottom: 6px;
+          line-height: 1.35;
         }
 
         .plan-name-text {
-          font-size: 1.35rem;
+          font-size: 1.45rem;
           font-weight: 800;
           color: var(--color-navy-primary);
           margin-bottom: 8px;
@@ -428,7 +442,7 @@ export default function Pricing() {
           color: var(--color-text-muted);
           line-height: 1.5;
           margin-bottom: 20px;
-          min-height: 48px;
+          min-height: 52px;
         }
 
         /* Price Box Strip */
@@ -442,21 +456,32 @@ export default function Pricing() {
         .price-amount-row {
           display: flex;
           align-items: baseline;
+          gap: 6px;
+          flex-wrap: wrap;
         }
 
         .price-big {
-          font-size: 1.85rem;
+          font-size: 2.1rem;
           font-weight: 800;
           color: var(--color-navy-primary);
           letter-spacing: -0.02em;
+          line-height: 1;
+        }
+
+        .price-period {
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: #64748B;
+          font-family: var(--font-primary), sans-serif;
         }
 
         .billing-term-note {
           display: block;
-          font-size: 0.76rem;
-          color: #94A3B8;
+          font-size: 0.78rem;
+          color: #64748B;
           font-family: var(--font-mono);
-          margin-top: 4px;
+          margin-top: 6px;
+          line-height: 1.4;
         }
 
         .plan-action-btn {

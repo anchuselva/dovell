@@ -40,12 +40,12 @@ export default function ShowcaseBanner() {
             <span className="bracket-tag-light">[ YOUR CONVERSATION WORKSPACE ]</span>
             
             <h2 className="banner-headline">
-              One place to manage, review, and <br />
-              <span className="banner-highlight">understand voice interactions</span>
+              Keep Every Interaction <br />
+              <span className="banner-highlight">Organized And Accessible</span>
             </h2>
 
             <p className="banner-text">
-              Give communication teams a shared workspace for following recordings from upload through review. Find the conversation you need, check its processing status, and see what requires attention.
+              Give communication teams a centralized workspace to manage recordings from upload through review. Quickly locate conversations, monitor processing progress, and identify pending tasks that require attention.
             </p>
 
             {/* 4 Supporting Points */}

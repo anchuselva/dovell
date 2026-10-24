@@ -21,7 +21,8 @@ const STEPS = [
     title: 'Bring your recordings together',
     description: 'Upload supported audio files and add conversation details such as date, team, category, and reference number.',
     status: 'Uploaded',
-    icon: Upload
+    icon: Upload,
+    graphic: '/graphics/how-works-1.svg'
   },
   {
     num: '02',
@@ -29,7 +30,8 @@ const STEPS = [
     title: 'Prepare conversations for review',
     description: 'Track processing progress and generate transcripts through a configured transcription service, or attach an existing transcript.',
     status: 'Processing / Ready for Review',
-    icon: Cpu
+    icon: Cpu,
+    graphic: '/graphics/how-works-2.svg'
   },
   {
     num: '03',
@@ -37,7 +39,8 @@ const STEPS = [
     title: 'Add human judgment',
     description: 'Review the transcript alongside the recording, correct errors, check suggested analysis, and record reviewer notes.',
     status: 'In Review / Verified',
-    icon: UserCheck
+    icon: UserCheck,
+    graphic: '/graphics/how-works-3.svg'
   },
   {
     num: '04',
@@ -45,7 +48,8 @@ const STEPS = [
     title: 'Turn reviewed records into useful reports',
     description: 'Filter conversations by topic, team, tag, review status, or outcome. Explore recurring patterns and prepare reports for your operational needs.',
     status: 'Ready for Reporting',
-    icon: BarChart4
+    icon: BarChart4,
+    graphic: '/graphics/how-works-4.svg'
   }
 ];
 
@@ -74,13 +78,18 @@ export default function ArchitecturePipeline() {
         {/* 4-Step Pipeline Grid */}
         <div className="steps-grid">
           {STEPS.map((step) => {
-            const Icon = step.icon;
             return (
               <div key={step.num} className="step-card">
                 <div className="step-top-row">
                   <span className="step-number">{step.num}</span>
-                  <div className="step-icon-badge">
-                    <Icon size={16} />
+                  <div className="step-graphic-badge">
+                    <img 
+                      src={step.graphic} 
+                      alt={step.category} 
+                      className="step-svg-graphic"
+                      width={38}
+                      height={38}
+                    />
                   </div>
                 </div>
 
@@ -343,15 +352,31 @@ export default function ArchitecturePipeline() {
           opacity: 0.85;
         }
 
-        .step-icon-badge {
-          width: 32px;
-          height: 32px;
-          border-radius: 8px;
-          background: rgba(232, 90, 42, 0.1);
-          color: #E85A2A;
+        .step-graphic-badge {
+          width: 52px;
+          height: 52px;
+          border-radius: 12px;
+          background: #FFFFFF;
+          border: 1px solid rgba(232, 90, 42, 0.22);
           display: flex;
           align-items: center;
           justify-content: center;
+          padding: 8px;
+          box-shadow: 0 4px 14px rgba(232, 90, 42, 0.08);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .step-card:hover .step-graphic-badge {
+          transform: scale(1.1) rotate(2deg);
+          border-color: #E85A2A;
+          box-shadow: 0 6px 18px rgba(232, 90, 42, 0.16);
+        }
+
+        .step-svg-graphic {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
         }
 
         .step-category-pill {

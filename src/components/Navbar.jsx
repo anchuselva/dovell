@@ -28,35 +28,14 @@ export default function Navbar() {
     <header className="ref-header-wrapper">
       <nav className={`ref-navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="ref-nav-container">
-          {/* Left: Signature Bracketed Circle Logo */}
+          {/* Left: Official Dovell Brand Logo */}
           <a href="#" className="ref-brand-logo" aria-label="Dovell Home">
-            <div className="ref-logo-icon-box">
-              <svg 
-                width="32" 
-                height="32" 
-                viewBox="0 0 34 34" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                className="ref-logo-svg"
-              >
-                {/* Top-left corner bracket */}
-                <path d="M 9 3 L 3 3 L 3 9" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="square" />
-                {/* Bottom-left corner bracket */}
-                <path d="M 3 25 L 3 31 L 9 31" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="square" />
-                {/* Top-right corner bracket */}
-                <path d="M 25 3 L 31 3 L 31 9" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="square" />
-                {/* Bottom-right corner bracket */}
-                <path d="M 31 25 L 31 31 L 25 31" stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="square" />
-                {/* Inner white circle with voice wave dot */}
-                <circle cx="17" cy="17" r="7.5" stroke="#FFFFFF" strokeWidth="2" />
-                <circle cx="17" cy="17" r="2.8" fill="#38BDF8" />
-              </svg>
-            </div>
-
-            <div className="ref-logo-text-group">
-              <span className="ref-logo-title">DOVELL</span>
-              <span className="ref-logo-subtitle">Voice Intelligence &amp; Conversation Analytics</span>
-            </div>
+            <img 
+              src="/graphics/logo.svg" 
+              alt="DOVELL" 
+              className="ref-logo-brand-img"
+              height={52}
+            />
           </a>
 
           {/* Center: Navigation Links */}
@@ -140,7 +119,7 @@ export default function Navbar() {
 
         .ref-navbar {
           background-color: #0A2240;
-          height: 74px;
+          height: 78px;
           display: flex;
           align-items: center;
           transition: background-color 0.25s ease, box-shadow 0.25s ease;
@@ -167,37 +146,20 @@ export default function Navbar() {
         .ref-brand-logo {
           display: flex;
           align-items: center;
-          gap: 14px;
           text-decoration: none;
         }
 
-        .ref-logo-icon-box {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        .ref-logo-brand-img {
+          height: 52px;
+          width: auto;
+          max-width: 200px;
+          object-fit: contain;
+          display: block;
+          transition: transform 0.2s ease;
         }
 
-        .ref-logo-text-group {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .ref-logo-title {
-          font-family: var(--font-primary);
-          font-size: 1.35rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          color: #FFFFFF;
-          line-height: 1.1;
-        }
-
-        .ref-logo-subtitle {
-          font-family: var(--font-primary);
-          font-size: 0.65rem;
-          font-weight: 500;
-          letter-spacing: 0.04em;
-          color: #7EC8E3;
-          margin-top: 2px;
+        .ref-brand-logo:hover .ref-logo-brand-img {
+          transform: scale(1.03);
         }
 
         /* Desktop Navigation Links */

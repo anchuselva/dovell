@@ -6,7 +6,9 @@ export const metadata = {
   keywords: 'Voice Intelligence, Conversation Analytics, Audio Recordings, Transcript Review, Customer Support Analytics, Dovell',
   authors: [{ name: 'Dovell' }],
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
 };
 
@@ -19,6 +21,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
